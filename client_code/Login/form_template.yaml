@@ -1,0 +1,44 @@
+components:
+- components:
+  - layout_properties: {grid_position: 'AYCSDY,ZIWYBN'}
+    name: title_lbl
+    properties: {align: center, background: '#32582d', foreground: '#98f1ba', role: title, text: Green Thumb nursery}
+    type: Label
+  - components:
+    - data_bindings:
+      - {code: 'self.item[''username'']', property: text, writeback: true}
+      layout_properties: {grid_position: 'KPXKCH,HSZIKL'}
+      name: username_txb
+      properties: {placeholder: Username, tooltip: Enter your username}
+      type: TextBox
+    - data_bindings:
+      - {code: 'self.item[''password'']', property: text, writeback: true}
+      layout_properties: {grid_position: 'KPXKCH,SWGSNX'}
+      name: password_txb
+      properties: {hide_text: true, placeholder: Password, tooltip: Enter your password}
+      type: TextBox
+    - event_bindings: {click: login_btn_click}
+      layout_properties: {grid_position: 'KPXKCH,DSFSAS'}
+      name: login_btn
+      properties: {bold: false, role: tonal-button, text: Login}
+      type: Button
+    - layout_properties: {grid_position: 'KPXKCH,WYIYHA'}
+      name: signup_lnk
+      properties: {text: 'Don''t have an account? Sign Up'}
+      type: Link
+    layout_properties: {grid_position: 'GTFKTB,TZCXLF'}
+    name: outlined_card_1
+    properties: {col_widths: '{"HSZIKL":20,"SWGSNX":20,"DSFSAS":10,"WYIYHA":10}', role: outlined-card}
+    type: ColumnPanel
+  layout_properties: {slot: default}
+  name: content_panel
+  properties: {col_widths: '{}'}
+  type: ColumnPanel
+- layout_properties: {slot: nav-right}
+  name: navbar_links
+  properties: {}
+  type: FlowPanel
+container:
+  properties: {html: '@theme:standard-page.html'}
+  type: HtmlTemplate
+is_package: true

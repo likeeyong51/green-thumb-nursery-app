@@ -3,7 +3,8 @@ unique_ids:
     standard-page.html: QLDQ2FQ42ACPOTQUGMAGSKVTBWOIAGF2
     theme.css: 2ZVDRCDZRUW6CYTWI6Z35QLPZXHHHG5I
   forms:
-    Form1: MCGSXG7ZWB37MMW3DDHDWWQY5UOZTT42
+    Login: MCGSXG7ZWB37MMW3DDHDWWQY5UOZTT42
+    Signup: '1751343048508352593317248.8254'
   modules: {}
   scripts: {}
   server_modules: {}

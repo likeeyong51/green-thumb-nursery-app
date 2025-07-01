@@ -1,0 +1,27 @@
+components:
+- layout_properties: {grid_position: 'EFLSVV,YNCBEL'}
+  name: firstname_txb
+  properties: {placeholder: First name, tooltip: Enter your first name}
+  type: TextBox
+- layout_properties: {grid_position: 'PVDHYA,IPMSRW'}
+  name: lastname_txb
+  properties: {placeholder: Last name, tooltip: Enter your last name}
+  type: TextBox
+- layout_properties: {grid_position: 'AXXUMP,ZCCCMX DGHWPA,YEYMVG'}
+  name: employeeID_txb
+  properties: {placeholder: Employee ID, tooltip: Enter your employee ID}
+  type: TextBox
+- layout_properties: {grid_position: 'AXXUMP,ZCCCMX FNEXVB,HXZQFT'}
+  name: password_txb
+  properties: {placeholder: Password, tooltip: Enter your password}
+  type: TextBox
+- layout_properties: {grid_position: 'AXXUMP,ZCCCMX EZEITT,ZNAKDX'}
+  name: role_drp
+  properties: {}
+  type: DropDown
+- layout_properties: {grid_position: 'AXXUMP,ZCCCMX YFNARA,XASAXN'}
+  name: signup_btn
+  properties: {bold: true, role: tonal-button, text: Sign Up}
+  type: Button
+container: {type: ColumnPanel}
+is_package: true
