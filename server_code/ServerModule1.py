@@ -21,18 +21,28 @@ import bcrypt
 #
 @anvil.server.callable
 def get_role():
+    '''return all roles from the role table'''
     return app_tables.role.search()
+
+def get_hashed_password(email):
+    '''get the hash_password for verification'''
+    user = app_tables.users.get(email=email)
+
+    if user:
+        return user['password_hash']
+
+    return None
 
 @anvil.server.callable
 def signup_user(firstname, lastname, emp_id, role, password):
     '''Signs up a new user, ensuring the username is unique.'''
-    username = firstname.replace(' ', '') # remove spaces
+    username = firstname.replace(' ', '').lower() # remove spaces
     email = f"{username}@nursery.com"
 
     # check if a user with this first name already exists
     if app_tables.users.get(email=email):
         # create a more unique username
-        username = f"{firstname.replace(' ', '')}{lastname.replace(' ', '')}"
+        username = f"{firstname.replace(' ', '').lower()}{lastname.replace(' ', '').lower()}"
         email = f"{username}@nursery.com"
 
         # check again with the combined name
@@ -42,7 +52,7 @@ def signup_user(firstname, lastname, emp_id, role, password):
     # if username is unique, create the user account
     new_user = app_tables.users.add_row(
         email=email, 
-        password_hash=hash_password(password), 
+        password_hash=password.decode('utf-8'), 
         role=role)
 
     return new_user
@@ -52,6 +62,7 @@ def hash_password(password):
     salt = bcrypt.gensalt()
     # Create a hash
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
+    print(hashed_password)
     return hashed_password
 
 def verify_password(password, hashed_password):

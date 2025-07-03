@@ -13,14 +13,25 @@ class Signup(SignupTemplate):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        self.item['firstname'] = self.item['role'] = self.item['password'] = None
+        self.item['firstname'] = \
+        self.item['lastname']  = \
+        self.item['emp_id']    = \
+        self.item['role']      = \
+        self.item['password']  = None
+        # populate dropdown list items from role table
         self.role_drp.items = [r['role'] for r in anvil.server.call('get_role')]
 
     def signup_btn_click(self, **event_args):
         """This method is called when the button is clicked"""
         # check if any of the required fields (firstname, role and password) is empty
-        if not all((self.item['firstname'], self.item['role'], self.item['password'])):
-            alert("Please fill in all required fields.")
+        if not all([
+            self.item['firstname'], 
+            self.item['lastname'], 
+            self.item['emp_id'], 
+            self.item['role'], 
+            self.item['password']
+        ]):
+            alert("All fields are required.")
             return
 
         try:
