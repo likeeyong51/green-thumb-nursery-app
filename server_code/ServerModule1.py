@@ -29,7 +29,7 @@ def get_hashed_password(email):
     user = app_tables.users.get(email=email)
 
     if user:
-        return user['password_hash']
+        return user['password_hash'].encode('utf-8')
 
     return None
 
@@ -40,7 +40,7 @@ def signup_user(firstname, lastname, emp_id, role, password):
     email = f"{username}@nursery.com"
 
     # check if a user with this first name already exists
-    if app_tables.users.get(email=email):
+    if app_tables.users.get(email=email) and verify_password(password, get_hashed_password(email)):
         # create a more unique username
         username = f"{firstname.replace(' ', '').lower()}{lastname.replace(' ', '').lower()}"
         email = f"{username}@nursery.com"
