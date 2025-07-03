@@ -62,11 +62,11 @@ def hash_password(password):
     salt = bcrypt.gensalt()
     # Create a hash
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
-    print(hashed_password.decode('utf-8'))
+    # print(hashed_password.decode('utf-8'))
     return hashed_password
 
 def verify_password(password, hashed_password):
     # Check if the password matches the hash
-    print(f'{password = }')
-    print(f'{hashed_password = }')
+    # print(f'{password = }')
+    # print(f'{hashed_password = }')
     return bcrypt.checkpw(password, hashed_password)
