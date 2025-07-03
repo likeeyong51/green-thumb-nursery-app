@@ -31,6 +31,14 @@ db_schema:
       type: number
     server: full
     title: Plant_Inventory
+  role:
+    client: none
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: role
+      type: string
+    server: full
+    title: Role
   sales_log:
     client: none
     columns:

@@ -1,25 +1,36 @@
 components:
-- layout_properties: {grid_position: 'EFLSVV,YNCBEL'}
+- data_bindings:
+  - {code: 'self.item[''firstname'']', property: text, writeback: true}
+  layout_properties: {grid_position: 'EFLSVV,YNCBEL'}
   name: firstname_txb
-  properties: {placeholder: First name, tooltip: Enter your first name}
+  properties: {placeholder: First name*, tooltip: Enter your first name}
   type: TextBox
-- layout_properties: {grid_position: 'PVDHYA,IPMSRW'}
+- data_bindings:
+  - {code: 'self.item[''lastname'']', property: text, writeback: true}
+  layout_properties: {grid_position: 'EFLSVV,JOCNGL'}
   name: lastname_txb
   properties: {placeholder: Last name, tooltip: Enter your last name}
   type: TextBox
-- layout_properties: {grid_position: 'AXXUMP,ZCCCMX DGHWPA,YEYMVG'}
+- data_bindings:
+  - {code: 'self.item[''emp_id'']', property: text, writeback: true}
+  layout_properties: {grid_position: ',AHKFIQ'}
   name: employeeID_txb
   properties: {placeholder: Employee ID, tooltip: Enter your employee ID}
   type: TextBox
-- layout_properties: {grid_position: 'AXXUMP,ZCCCMX FNEXVB,HXZQFT'}
-  name: password_txb
-  properties: {placeholder: Password, tooltip: Enter your password}
-  type: TextBox
-- layout_properties: {grid_position: 'AXXUMP,ZCCCMX EZEITT,ZNAKDX'}
+- data_bindings:
+  - {code: 'self.item[''role'']', property: selected_value, writeback: true}
+  layout_properties: {grid_position: ',QNFQKP'}
   name: role_drp
-  properties: {}
+  properties: {include_placeholder: true, placeholder: Role*, tooltip: Select your role}
   type: DropDown
-- layout_properties: {grid_position: 'AXXUMP,ZCCCMX YFNARA,XASAXN'}
+- data_bindings:
+  - {code: 'self.item[''password'']', property: text, writeback: true}
+  layout_properties: {grid_position: ',undefined'}
+  name: password_txb
+  properties: {placeholder: Password*, tooltip: Enter your password}
+  type: TextBox
+- event_bindings: {click: signup_btn_click}
+  layout_properties: {grid_position: ',CDVCPH'}
   name: signup_btn
   properties: {bold: true, role: tonal-button, text: Sign Up}
   type: Button

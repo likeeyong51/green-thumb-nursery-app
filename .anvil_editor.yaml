@@ -7,4 +7,5 @@ unique_ids:
     Signup: '1751343048508352593317248.8254'
   modules: {}
   scripts: {}
-  server_modules: {}
+  server_modules:
+    ServerModule1: '175150307901418512390947.736156'

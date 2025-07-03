@@ -22,7 +22,8 @@ components:
       name: login_btn
       properties: {bold: false, role: tonal-button, text: Login}
       type: Button
-    - layout_properties: {grid_position: 'KPXKCH,WYIYHA'}
+    - event_bindings: {click: signup_lnk_click}
+      layout_properties: {grid_position: 'KPXKCH,WYIYHA'}
       name: signup_lnk
       properties: {text: 'Don''t have an account? Sign Up'}
       type: Link
