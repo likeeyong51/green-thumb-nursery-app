@@ -40,19 +40,19 @@ def signup_user(firstname, lastname, emp_id, role, password):
     email = f"{username}@nursery.com"
 
     # check if a user with this first name already exists
-    if app_tables.users.get(email=email) and verify_password(password, get_hashed_password(email)):
+    if app_tables.users.get(email=email) and verify_password(password.encode('utf-8'), get_hashed_password(email)):
         # create a more unique username
         username = f"{firstname.replace(' ', '').lower()}{lastname.replace(' ', '').lower()}"
         email = f"{username}@nursery.com"
 
         # check again with the combined name
-        if app_tables.users.get(email=email):
+        if app_tables.users.get(email=email) and verify_password(password.encode('utf-8'), get_hashed_password(email)):
             raise anvil.server.ExecutionTerminatedError("A user with this name already exists.")
 
     # if username is unique, create the user account
     new_user = app_tables.users.add_row(
         email=email, 
-        password_hash=password.decode('utf-8'), 
+        password_hash=hash_password(password).decode('utf-8'), # store hash password as text
         role=role)
 
     return new_user
@@ -62,9 +62,11 @@ def hash_password(password):
     salt = bcrypt.gensalt()
     # Create a hash
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
-    print(hashed_password)
+    print(hashed_password.decode('utf-8'))
     return hashed_password
 
 def verify_password(password, hashed_password):
     # Check if the password matches the hash
-    return bcrypt.checkpw(password.encode('utf-8'), hashed_password)
+    print(f'{password = }')
+    print(f'{hashed_password = }')
+    return bcrypt.checkpw(password, hashed_password)
