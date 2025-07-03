@@ -26,9 +26,10 @@ def get_role():
 
 def get_hashed_password(email):
     '''get the hash_password for verification'''
+    # get user info based on login email
     user = app_tables.users.get(email=email)
 
-    if user:
+    if user: # if found
         return user['password_hash'].encode('utf-8')
 
     return None

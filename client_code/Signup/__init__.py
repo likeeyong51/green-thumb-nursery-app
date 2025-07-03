@@ -42,6 +42,7 @@ class Signup(SignupTemplate):
                 self.item['emp_id'], 
                 self.item['role'], 
                 self.item['password']):
+                # if signup is successful, notify user with success message
                 Notification('Account created successfully!  Please log in.').show()
                 # go back to the login form
                 anvil.open_form('Login')
