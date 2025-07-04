@@ -35,16 +35,21 @@ class Signup(SignupTemplate):
             return
 
         try:
-            if anvil.server.call(
+            new_user, username = anvil.server.call(
                 'signup_user', 
                 self.item['firstname'], 
                 self.item['lastname'], 
                 self.item['emp_id'], 
                 self.item['role'], 
-                self.item['password']):
+                self.item['password'])
+            if new_user:
                 # if signup is successful, notify user with success message
-                Notification('Account created successfully!  Please log in.').show()
-                # go back to the login form
-                anvil.open_form('Login')
+                Notification(f'Account created successfully! Your username is {username}. Please log in.').show()
+            else:
+                # signup failed
+                Notification(f'{username} account exists.  Please log in').show()
+            # go back to the login form
+            anvil.open_form('Login')
+                
         except Exception as e:
             alert(str(e))

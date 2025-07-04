@@ -48,7 +48,9 @@ def signup_user(firstname, lastname, emp_id, role, password):
 
         # check again with the combined name
         if app_tables.users.get(email=email) and verify_password(password.encode('utf-8'), get_hashed_password(email)):
-            raise anvil.server.ExecutionTerminatedError("A user with this name already exists.")
+            print(f"User {username} already exists.")
+            # raise anvil.server.ExecutionTerminatedError("A user with this name already exists.")
+            return False, username
 
     # if username is unique, create the user account
     new_user = app_tables.users.add_row(
@@ -56,7 +58,7 @@ def signup_user(firstname, lastname, emp_id, role, password):
         password_hash=hash_password(password).decode('utf-8'), # store hash password as text
         role=role)
 
-    return new_user
+    return new_user, username
 
 def hash_password(password):
     # Generate a salt

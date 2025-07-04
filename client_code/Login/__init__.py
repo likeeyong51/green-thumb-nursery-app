@@ -5,6 +5,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.users
+from ..Signup import Signup
 
 class Login(LoginTemplate):
     def __init__(self, **properties):
@@ -12,6 +13,7 @@ class Login(LoginTemplate):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
+        self.new_user = {}
 
     def login_btn_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -27,5 +29,11 @@ class Login(LoginTemplate):
 
     def signup_lnk_click(self, **event_args):
         """This method is called when the link is clicked"""
-        anvil.open_form('Signup')
+        # anvil.open_form('Signup')
+        self.signup_pnl.clear()
+        self.signup_pnl.add_component(Signup(item=self.new_user))
+        
+        # show signup card
+        self.signup_crd.visible = True
+        
         
