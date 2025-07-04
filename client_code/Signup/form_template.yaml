@@ -3,7 +3,7 @@ components:
   - {code: 'self.item[''firstname'']', property: text, writeback: true}
   layout_properties: {grid_position: 'EFLSVV,YNCBEL'}
   name: firstname_txb
-  properties: {placeholder: First name*, tooltip: Enter your first name}
+  properties: {placeholder: First name, tooltip: Enter your first name}
   type: TextBox
 - data_bindings:
   - {code: 'self.item[''lastname'']', property: text, writeback: true}
@@ -13,7 +13,7 @@ components:
   type: TextBox
 - data_bindings:
   - {code: 'self.item[''emp_id'']', property: text, writeback: true}
-  layout_properties: {grid_position: ',AHKFIQ'}
+  layout_properties: {grid_position: 'EFLSVV,SSDJQH'}
   name: employeeID_txb
   properties: {placeholder: Employee ID, tooltip: Enter your employee ID}
   type: TextBox
@@ -21,13 +21,13 @@ components:
   - {code: 'self.item[''role'']', property: selected_value, writeback: true}
   layout_properties: {grid_position: ',QNFQKP'}
   name: role_drp
-  properties: {include_placeholder: true, placeholder: Role*, tooltip: Select your role}
+  properties: {include_placeholder: true, placeholder: Role, tooltip: Select your role}
   type: DropDown
 - data_bindings:
   - {code: 'self.item[''password'']', property: text, writeback: true}
   layout_properties: {grid_position: ',undefined'}
   name: password_txb
-  properties: {placeholder: Password*, tooltip: Enter your password}
+  properties: {placeholder: Password, tooltip: Enter your password}
   type: TextBox
 - event_bindings: {click: signup_btn_click}
   layout_properties: {grid_position: ',CDVCPH'}
