@@ -49,7 +49,9 @@ class Signup(SignupTemplate):
                 # signup failed
                 Notification(f'{username} account exists.  Please log in').show()
             # go back to the login form
-            anvil.open_form('Login')
+            # anvil.open_form('Login')
+            # hide signup card
+            get_open_form().hide_signup_card()
                 
         except Exception as e:
             alert(str(e))

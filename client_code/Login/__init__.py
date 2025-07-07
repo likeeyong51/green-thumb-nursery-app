@@ -37,3 +37,6 @@ class Login(LoginTemplate):
         self.signup_crd.visible = True
         
         
+    def hide_signup_card(self, show=False):
+        '''hide or show signup card'''
+        self.signup_crd.visible = show
