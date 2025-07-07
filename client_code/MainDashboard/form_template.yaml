@@ -1,0 +1,21 @@
+components:
+- layout_properties: {slot: default}
+  name: content_panel
+  properties: {}
+  type: ColumnPanel
+- layout_properties: {slot: nav-right}
+  name: navbar_links
+  properties: {}
+  type: FlowPanel
+- layout_properties: {slot: top-left-btn}
+  name: image_1
+  properties: {height: 66, source: _/theme/green_thumb_logo_1.png}
+  type: Image
+- layout_properties: {slot: title}
+  name: label_1
+  properties: {text: Green Thumb Nursery}
+  type: Label
+container:
+  properties: {html: '@theme:standard-page.html'}
+  type: HtmlTemplate
+is_package: true

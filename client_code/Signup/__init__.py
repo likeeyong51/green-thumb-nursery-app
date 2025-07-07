@@ -19,7 +19,7 @@ class Signup(SignupTemplate):
         self.item['role']      = \
         self.item['password']  = None
         # populate dropdown list items from role table
-        self.role_drp.items = [r['role'] for r in anvil.server.call('get_role')]
+        self.role_drp.items = [r['role'] for r in anvil.server.call('get_roles')]
 
     def signup_btn_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -44,7 +44,7 @@ class Signup(SignupTemplate):
                 self.item['password'])
             if new_user:
                 # if signup is successful, notify user with success message
-                Notification(f'Account created successfully! Your username is {username}. Please log in.').show()
+                alert(f'Account created successfully!\nYour username is {username}. Please log in.')
             else:
                 # signup failed
                 Notification(f'{username} account exists.  Please log in').show()

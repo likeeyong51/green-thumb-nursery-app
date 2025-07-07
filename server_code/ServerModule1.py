@@ -20,7 +20,29 @@ import bcrypt
 #   return 42
 #
 @anvil.server.callable
-def get_role():
+def signin_user(username, password):
+    '''login verification and setting access based on role'''
+    if not username and not password:
+        return False, None # invalid password; login failed
+        
+    # build email string
+    email = f'{username}@nursery.com'
+
+    # check if a user with this username exists and password matches
+    if app_tables.users.get(email=email) and verify_password(password.encode('utf-8'), get_hashed_password(email)):
+        return True, get_user_role(email) # login sucessful
+
+    return False, None
+
+def get_user_role(email):
+    '''return user role based on username'''
+    user = app_tables.users.get(email=email)
+
+    if user: # if user exists
+        return user['role']
+
+@anvil.server.callable
+def get_roles():
     '''return all roles from the role table'''
     return app_tables.role.search()
 
@@ -54,8 +76,10 @@ def signup_user(firstname, lastname, emp_id, role, password):
 
     # if username is unique, create the user account
     new_user = app_tables.users.add_row(
-        email=email, 
+        email=email,
+        enabled=True,
         password_hash=hash_password(password).decode('utf-8'), # store hash password as text
+        # confirmed_email=True,
         role=role)
 
     return new_user, username
