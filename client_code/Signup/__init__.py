@@ -19,7 +19,7 @@ class Signup(SignupTemplate):
         self.item['role']      = \
         self.item['password']  = None
         # populate dropdown list items from role table
-        self.role_drp.items = [r['role'] for r in anvil.server.call('get_roles')]
+        self.role_drp.items = [r['role'] for r in anvil.server.call('get_user_roles')]
 
     def signup_btn_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -29,9 +29,14 @@ class Signup(SignupTemplate):
             self.item['lastname'], 
             self.item['emp_id'], 
             self.item['role'], 
-            self.item['password']
+            self.item['password'],
+            self.item['confirmed_password']
         ]):
             alert("All fields are required.")
+            return
+
+        if self.item['password'] != self.item['confirmed_password']:
+            alert("Your password does not match. Please check and enter your password again.")
             return
 
         try:
@@ -55,3 +60,7 @@ class Signup(SignupTemplate):
                 
         except Exception as e:
             alert(str(e))
+
+    def cancel_btn_click(self, **event_args):
+        """hide signup card"""
+        get_open_form().hide_signup_card()

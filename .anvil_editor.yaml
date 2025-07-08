@@ -10,4 +10,4 @@ unique_ids:
   modules: {}
   scripts: {}
   server_modules:
-    ServerModule1: '175150307901418512390947.736156'
+    authentication_svrmod: '175150307901418512390947.736156'

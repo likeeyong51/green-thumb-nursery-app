@@ -20,41 +20,9 @@ import bcrypt
 #   return 42
 #
 @anvil.server.callable
-def signin_user(username, password):
-    '''login verification and setting access based on role'''
-    if not username and not password:
-        return False, None # invalid password; login failed
-        
-    # build email string
-    email = f'{username}@nursery.com'
-
-    # check if a user with this username exists and password matches
-    if app_tables.users.get(email=email) and verify_password(password.encode('utf-8'), get_hashed_password(email)):
-        return True, get_user_role(email) # login sucessful
-
-    return False, None
-
-def get_user_role(email):
-    '''return user role based on username'''
-    user = app_tables.users.get(email=email)
-
-    if user: # if user exists
-        return user['role']
-
-@anvil.server.callable
-def get_roles():
+def get_user_roles():
     '''return all roles from the role table'''
     return app_tables.role.search()
-
-def get_hashed_password(email):
-    '''get the hash_password for verification'''
-    # get user info based on login email
-    user = app_tables.users.get(email=email)
-
-    if user: # if found
-        return user['password_hash'].encode('utf-8')
-
-    return None
 
 @anvil.server.callable
 def signup_user(firstname, lastname, emp_id, role, password):
@@ -84,7 +52,28 @@ def signup_user(firstname, lastname, emp_id, role, password):
 
     return new_user, username
 
+#--------------------
+# utility functions
+#--------------------
+def get_user_role(email):
+    '''return user role based on username'''
+    user = app_tables.users.get(email=email)
+
+    if user: # if user exists
+        return user['role']
+
+def get_hashed_password(email):
+    '''get the hash_password for verification'''
+    # get user info based on login email
+    user = app_tables.users.get(email=email)
+
+    if user: # if found
+        return user['password_hash'].encode('utf-8')
+
+    return None
+
 def hash_password(password):
+    '''encrypt and returned a hashed password'''
     # Generate a salt
     salt = bcrypt.gensalt()
     # Create a hash
@@ -93,7 +82,25 @@ def hash_password(password):
     return hashed_password
 
 def verify_password(password, hashed_password):
+    '''verify the password entered is the same as the one stored in the user record'''
     # Check if the password matches the hash
     # print(f'{password = }')
     # print(f'{hashed_password = }')
     return bcrypt.checkpw(password, hashed_password)
+
+# originally implemented, but will use the one from the builtin service
+# @anvil.server.callable
+# def signin_user(username, password):
+#     '''login verification and setting access based on role'''
+#     if not username and not password:
+#         return False, None # invalid password; login failed
+        
+#     # build email string
+#     email = f'{username}@nursery.com'
+
+#     # check if a user with this username exists and password matches
+#     if app_tables.users.get(email=email) and verify_password(password.encode('utf-8'), get_hashed_password(email)):
+#         return True, get_user_role(email) # login sucessful
+
+#     return False, None
+
