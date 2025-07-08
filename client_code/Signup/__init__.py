@@ -34,9 +34,9 @@ class Signup(SignupTemplate):
         ]):
             alert("All fields are required.")
             return
-
+        # if passwords entered is inconsistent
         if self.item['password'] != self.item['confirmed_password']:
-            alert("Your password does not match. Please check and enter your password again.")
+            alert("Your passwords do not match. Please check and enter your password again.")
             return
 
         try:
