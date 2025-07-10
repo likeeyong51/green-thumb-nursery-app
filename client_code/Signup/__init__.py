@@ -36,7 +36,7 @@ class Signup(SignupTemplate):
             return
         # if passwords entered is inconsistent
         if self.item['password'] != self.item['confirmed_password']:
-            alert("Your passwords do not match. Please check and enter your password again.")
+            alert("Your passwords do not match. Please enter your passwords again.")
             return
 
         try:
@@ -64,3 +64,17 @@ class Signup(SignupTemplate):
     def cancel_btn_click(self, **event_args):
         """hide signup card"""
         get_open_form().hide_signup_card()
+
+    def check_password_match(self, **event_args):
+        '''As a user enters the passwords, it check if the password and 
+           confirmed password matches and show a relevant indicator'''
+        if self.password_txb.text != self.confirmed_password_txb.text:
+            # show mismatched indicator
+            self.conf_pass_check_lbl.icon = 'fa:ban'
+            self.conf_pass_check_lbl.foreground = 'red'
+            
+        if self.password_txb.text == self.confirmed_password_txb.text:
+            # show matched indicator
+            self.conf_pass_check_lbl.icon = 'fa:check'
+            self.conf_pass_check_lbl.foreground = 'green'
+            
