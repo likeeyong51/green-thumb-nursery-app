@@ -32,9 +32,17 @@ components:
     layout_properties: {grid_position: 'ICLZOO,WKHMUW'}
     name: add_plant_btn
     properties:
+      bold: false
+      font_size: 20
       text: |
         Add Plant
+      tooltip: Add new plant
       visible: false
+    type: Button
+  - event_bindings: {click: record_sale_btn_click}
+    layout_properties: {grid_position: 'VXHQEE,QFKEOW'}
+    name: record_sale_btn
+    properties: {font_size: 20, text: Record Sale, tooltip: Record Sales Transaction}
     type: Button
   layout_properties: {slot: left-nav}
   name: side_pnl

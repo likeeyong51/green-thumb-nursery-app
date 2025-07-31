@@ -21,6 +21,9 @@ class Signup_frm(Signup_frmTemplate):
         # populate dropdown list items from role table
         self.role_drp.items = [r['role'] for r in anvil.server.call('get_user_roles')]
 
+        # delay focus slightly to ensure the form is rendered first
+        anvil.js.window.setTimeout(lambda: self.firstname_txb.focus(), 100)
+
     def signup_btn_click(self, **event_args):
         """This method is called when the button is clicked"""
         # check if any of the required fields (firstname, role and password) is empty

@@ -7,8 +7,10 @@ unique_ids:
     AddPlant_frm: '1753929245052837122324270.3282'
     Login_frm: MCGSXG7ZWB37MMW3DDHDWWQY5UOZTT42
     MainDashboard_frm: '17518630832441498620391.9854503'
+    RecordSale_frm: '1753938666975892482571131.9785'
     Signup_frm: '1751343048508352593317248.8254'
   modules: {}
   scripts: {}
   server_modules:
     authentication_svrmod: '175150307901418512390947.736156'
+    plant_mgmt_svrmod: '1753934903010703940923851.3505'

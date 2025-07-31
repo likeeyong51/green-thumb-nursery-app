@@ -15,6 +15,9 @@ class Login_frm(Login_frmTemplate):
         # Any code you write here will run before the form opens.
         self.new_user = {}
 
+        # delay focus slightly to ensure the form is rendered first
+        anvil.js.window.setTimeout(lambda: self.username_txb.focus(), 100)
+
     def login_btn_click(self, **event_args):
         """This method is called when the button is clicked"""
         # get and format the username
@@ -34,7 +37,7 @@ class Login_frm(Login_frmTemplate):
         """This method is called when the link is clicked"""
         # anvil.open_form('Signup')
         self.signup_pnl.clear()
-        self.signup_pnl.add_component(Signup(item=self.new_user))
+        self.signup_pnl.add_component(Signup_frm(item=self.new_user))
         
         # show signup card
         self.signup_crd.visible = True

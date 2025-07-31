@@ -22,6 +22,7 @@ components:
       type: TextBox
     - data_bindings:
       - {code: 'self.item[''password'']', property: text, writeback: true}
+      event_bindings: {pressed_enter: login_btn_click}
       layout_properties: {grid_position: 'KPXKCH,SWGSNX'}
       name: password_txb
       properties: {bold: false, hide_text: true, placeholder: Password, tooltip: Enter your password}

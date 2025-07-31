@@ -27,7 +27,7 @@ db_schema:
       name: price
       type: number
     - admin_ui: {order: 3, width: 200}
-      name: stock_quantity
+      name: stock_qty
       type: number
     server: full
     title: Plant_Inventory

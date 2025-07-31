@@ -6,6 +6,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from ..AddPlant_frm import AddPlant_frm
+from ..RecordSale_frm import RecordSale_frm
 
 class MainDashboard_frm(MainDashboard_frmTemplate):
     def __init__(self, **properties):
@@ -23,4 +24,9 @@ class MainDashboard_frm(MainDashboard_frmTemplate):
         """This method is called when the button is clicked"""
         self.load_pnl.clear()
         self.load_pnl.add_component(AddPlant_frm())
+
+    def record_sale_btn_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        self.load_pnl.clear()
+        self.load_pnl.add_component(RecordSale_frm())
         
