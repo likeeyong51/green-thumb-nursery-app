@@ -25,7 +25,6 @@ def add_plant(plant_info):
     if not app_tables.plant_inventory.get(name=plant_info['name']):
         # then add plant
         return app_tables.plant_inventory.add_row(**plant_info)
-            # return True # new plant added successfully
 
     # plant already exists
     return False
@@ -36,5 +35,27 @@ def get_plant_list():
     plant_list = app_tables.plant_inventory.search()
     if plant_list:
         return plant_list
-    else:
-        print("ERROR")
+
+    return False # error
+
+@anvil.server.callable
+def record_sale(sale):
+    # CHECK if qty sold <= available stock
+    plant = app_tables.plant_inventory.get(name=sale['plant_sold'])
+    
+    if sale['quantity_sold'] > plant['stock_qty']:
+        # qty not available
+        return False, plant['stock_qty']
+        
+    # CREATE a row in the Sales_Log table
+    # retrieve user record
+    sale['recorded_by'] = app_tables.users.get(email=f"{sale['recorded_by']}@nursery.com")
+    # set plant sold
+    sale['plant_sold'] = plant
+    
+    if app_tables.sales_log.add_row(**sale):
+        # UPDATE the stock quantity in the Plant_inventory table
+        plant['stock_qty'] -= sale['quantity_sold']
+        return True, plant['stock_qty']  # sales transaction completed successfully
+
+    return False, -1 # sales transaction failed

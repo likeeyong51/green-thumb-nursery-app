@@ -16,6 +16,7 @@ class MainDashboard_frm(MainDashboard_frmTemplate):
         # Any code you write here will run before the form opens.
         # GET user role
         self.role = properties['user_role']
+        self.username = properties['username']
         if self.role == 'Manager':
             # show Add Plant option, which is accessible to managers and admin only
             self.add_plant_btn.visible = True
@@ -28,5 +29,5 @@ class MainDashboard_frm(MainDashboard_frmTemplate):
     def record_sale_btn_click(self, **event_args):
         """This method is called when the button is clicked"""
         self.load_pnl.clear()
-        self.load_pnl.add_component(RecordSale_frm())
+        self.load_pnl.add_component(RecordSale_frm(username=self.username))
         
