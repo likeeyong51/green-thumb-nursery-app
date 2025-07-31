@@ -1,4 +1,4 @@
-from ._anvil_designer import SignupTemplate
+from ._anvil_designer import Signup_frmTemplate
 from anvil import *
 import anvil.server
 import anvil.users
@@ -7,7 +7,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from anvil import Notification
 
-class Signup(SignupTemplate):
+class Signup_frm(Signup_frmTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)

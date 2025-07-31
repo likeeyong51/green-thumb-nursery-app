@@ -52,15 +52,17 @@ def signup_user(firstname, lastname, emp_id, role, password):
 
     return new_user, username
 
-#--------------------
-# utility functions
-#--------------------
+@anvil.server.callable
 def get_user_role(email):
     '''return user role based on username'''
     user = app_tables.users.get(email=email)
 
     if user: # if user exists
         return user['role']
+        
+#--------------------
+# utility functions
+#--------------------
 
 def get_hashed_password(email):
     '''get the hash_password for verification'''

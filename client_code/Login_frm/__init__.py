@@ -1,13 +1,13 @@
-from ._anvil_designer import LoginTemplate
+from ._anvil_designer import Login_frmTemplate
 from anvil import *
 import anvil.server
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.users
-from ..Signup import Signup
+from ..Signup_frm import Signup_frm
 
-class Login(LoginTemplate):
+class Login_frm(Login_frmTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
@@ -23,7 +23,10 @@ class Login(LoginTemplate):
         try:
             anvil.users.login_with_email(email_for_login, self.item['password'])
             # if login is successful, open with main app form
-            anvil.open_form('MainDashboard')
+            anvil.open_form(
+                'MainDashboard_frm',
+                user_role = anvil.server.call('get_user_role', email_for_login)
+            )
         except anvil.users.AuthenticationFailed as e:
             alert(str(e))
 
