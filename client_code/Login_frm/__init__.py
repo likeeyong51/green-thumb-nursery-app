@@ -13,6 +13,7 @@ class Login_frm(Login_frmTemplate):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
+        # initialise an empty user dictionary
         self.new_user = {}
 
         # delay focus slightly to ensure the form is rendered first

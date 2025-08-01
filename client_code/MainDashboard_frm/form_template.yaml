@@ -12,7 +12,7 @@ components:
   - data_bindings:
     - {code: 'self.item[''username'']', property: text, writeback: false}
     layout_properties: {}
-    name: iser_lbl
+    name: user_lbl
     properties: {icon: 'fa:address-book-o'}
     type: Label
   layout_properties: {slot: nav-right}

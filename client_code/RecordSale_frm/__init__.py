@@ -18,6 +18,7 @@ class RecordSale_frm(RecordSale_frmTemplate):
         
         # get plant list from current plant inventory
         plant_list = anvil.server.call('get_plant_list')
+        # add it to the dropdown item list
         self.plant_drp.items = [plant['name'] for plant in plant_list]
         
         # delay focus until form loads properly
@@ -31,14 +32,20 @@ class RecordSale_frm(RecordSale_frmTemplate):
             return
 
         # RECORD sale transaction
+        # SET current date of the transaction
         self.item['sale_date'] = date.today() #.strftime('%d/%m/%Y')
-
         status, qty = anvil.server.call('record_sale', self.item)
         
-        if status:
+        if status: # successful
             Notification(f'Sale transaction recorded successfully! we still have {qty} in stock.').show()
-        elif qty > 0:
+        elif qty > 0: # qty is -1 => quantity specified is more than what's available in the inventory
                 alert(f'Quantity not available.  We only have {qty} in stock')
-        else:
-            alert('Sale recording unsuccessful.  Please try again.')
+        else: # transaction recording failed
+            alert('Sale recording unsuccessful.  Please try again or consult with the administrator.')
+
+        # reset ui
+        self.plant_drp.selected_value = None
+        self.qty_txb.text = ''
+        # put focus back on the dropdown menu
+        self.plant_drp.focus()
         

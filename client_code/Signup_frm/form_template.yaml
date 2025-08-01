@@ -17,39 +17,39 @@ components:
   - {code: 'self.item[''firstname'']', property: text, writeback: true}
   layout_properties: {grid_position: 'FVIHTG,TUYWZB'}
   name: firstname_txb
-  properties: {placeholder: First name, tooltip: Enter your first name}
+  properties: {placeholder: First name, role: outlined, tooltip: Enter your first name}
   type: TextBox
 - data_bindings:
   - {code: 'self.item[''lastname'']', property: text, writeback: true}
   layout_properties: {grid_position: 'FVIHTG,HGHVNK'}
   name: lastname_txb
-  properties: {placeholder: Last name, tooltip: Enter your last name}
+  properties: {placeholder: Last name, role: outlined, tooltip: Enter your last name}
   type: TextBox
 - data_bindings:
   - {code: 'self.item[''emp_id'']', property: text, writeback: true}
   layout_properties: {grid_position: 'UFBMIU,KISPAO'}
   name: employeeID_txb
-  properties: {placeholder: Employee ID, tooltip: Enter your employee ID}
+  properties: {placeholder: Employee ID, role: outlined, tooltip: Enter your employee ID}
   type: TextBox
 - data_bindings:
   - {code: 'self.item[''role'']', property: selected_value, writeback: true}
   layout_properties: {grid_position: 'UFBMIU,JOPGKY'}
   name: role_drp
-  properties: {include_placeholder: true, placeholder: Role, tooltip: Select your role}
+  properties: {include_placeholder: true, placeholder: Role, role: outlined, tooltip: Select your role}
   type: DropDown
 - data_bindings:
   - {code: 'self.item[''password'']', property: text, writeback: true}
   event_bindings: {change: check_password_match}
   layout_properties: {grid_position: 'UFBMIU,XVMNNP'}
   name: password_txb
-  properties: {hide_text: true, placeholder: Password, tooltip: Enter your password}
+  properties: {hide_text: true, placeholder: Password, role: outlined, tooltip: Enter your password}
   type: TextBox
 - data_bindings:
   - {code: 'self.item[''confirmed_password'']', property: text, writeback: true}
   event_bindings: {change: check_password_match}
   layout_properties: {grid_position: 'UFBMIU,CYCRAI'}
   name: confirmed_password_txb
-  properties: {hide_text: true, placeholder: Confirmed Password, tooltip: Enter your password again to confirm password}
+  properties: {hide_text: true, placeholder: Confirmed Password, role: outlined, tooltip: Enter your password again to confirm password}
   type: TextBox
 - layout_properties: {grid_position: 'UFBMIU,QLGSOT'}
   name: conf_pass_check_lbl
@@ -67,12 +67,12 @@ components:
   - event_bindings: {click: signup_btn_click}
     layout_properties: {grid_position: 'HNUEPA,DNTJNY'}
     name: signup_btn
-    properties: {bold: false, role: tonal-button, text: Sign Up}
+    properties: {bold: false, icon: 'fa:thumbs-o-up', role: tonal-button, text: Sign Up}
     type: Button
   - event_bindings: {click: cancel_btn_click}
     layout_properties: {grid_position: 'HNUEPA,YLKTNG'}
     name: cancel_btn
-    properties: {text: Cancel}
+    properties: {icon: 'fa:close', text: Cancel}
     type: Button
   - layout_properties: {grid_position: 'HNUEPA,HWEJEW'}
     name: spacer_4

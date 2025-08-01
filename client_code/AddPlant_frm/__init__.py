@@ -25,7 +25,7 @@ class AddPlant_frm(AddPlant_frmTemplate):
             self.price_txb.text and 
             self.initial_stock_qty_txb.text):
             # if any fields are blank, show error message
-            alert('Fields cannot be empty.  Please enter a new plant information.')
+            alert('All fields cannot be empty. Please enter a new plant information again.')
             return # stop execution
 
         # otherwise, add new plant
@@ -36,8 +36,10 @@ class AddPlant_frm(AddPlant_frmTemplate):
             alert('Plant record exists already.  Please use edit plant feature to modify plant record.')
 
             # reset text fields
-            self.plant_name_txb.text = \
-            self.price_txb.text = \
+            self.plant_name_txb.text        = \
+            self.price_txb.text             = \
             self.initial_stock_qty_txb.text = ''
+            
             # reset dropdown plant type
             self.plant_type_drp.selected_value = None
+

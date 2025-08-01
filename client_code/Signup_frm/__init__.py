@@ -50,6 +50,7 @@ class Signup_frm(Signup_frmTemplate):
                 self.item['emp_id'], 
                 self.item['role'], 
                 self.item['password'])
+            
             if new_user:
                 # if signup is successful, notify user with success message
                 alert(f'Account created successfully!\nYour username is {username}. Please log in.')
@@ -73,11 +74,13 @@ class Signup_frm(Signup_frmTemplate):
            confirmed password matches and show a relevant indicator'''
         if self.password_txb.text != self.confirmed_password_txb.text:
             # show mismatched indicator
-            self.conf_pass_check_lbl.icon = 'fa:ban'
+            self.confirmed_password_txb.role    = 'outlined-error'
+            self.conf_pass_check_lbl.icon       = 'fa:ban'
             self.conf_pass_check_lbl.foreground = 'red'
             
         if self.password_txb.text == self.confirmed_password_txb.text:
             # show matched indicator
-            self.conf_pass_check_lbl.icon = 'fa:check'
+            self.confirmed_password_txb.role    = 'outlined'
+            self.conf_pass_check_lbl.icon       = 'fa:check'
             self.conf_pass_check_lbl.foreground = 'green'
             

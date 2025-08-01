@@ -15,8 +15,10 @@ class MainDashboard_frm(MainDashboard_frmTemplate):
 
         # Any code you write here will run before the form opens.
         # GET user role
-        self.role = properties['user_role']
-        self.username = properties['username']
+        self.role          = properties['user_role']
+        self.username      = properties['username']
+        self.user_lbl.text = self.username
+        
         if self.role == 'Manager':
             # show Add Plant option, which is accessible to managers and admin only
             self.add_plant_btn.visible = True

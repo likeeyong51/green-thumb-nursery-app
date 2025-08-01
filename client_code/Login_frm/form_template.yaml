@@ -11,6 +11,7 @@ components:
       role: title
       spacing:
         margin: [12, null, 25, null]
+        padding: [15, null, 15, null]
       text: Green Thumb Nursery Log In
     type: Label
   - components:
@@ -18,14 +19,14 @@ components:
       - {code: 'self.item[''username'']', property: text, writeback: true}
       layout_properties: {grid_position: 'KPXKCH,HSZIKL'}
       name: username_txb
-      properties: {bold: false, placeholder: Username, tooltip: Enter your username}
+      properties: {bold: false, placeholder: Username, role: outlined, tooltip: Enter your username}
       type: TextBox
     - data_bindings:
       - {code: 'self.item[''password'']', property: text, writeback: true}
       event_bindings: {pressed_enter: login_btn_click}
       layout_properties: {grid_position: 'KPXKCH,SWGSNX'}
       name: password_txb
-      properties: {bold: false, hide_text: true, placeholder: Password, tooltip: Enter your password}
+      properties: {bold: false, hide_text: true, placeholder: Password, role: outlined, tooltip: Enter your password}
       type: TextBox
     - event_bindings: {click: login_btn_click}
       layout_properties: {grid_position: 'KPXKCH,DSFSAS'}

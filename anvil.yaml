@@ -107,5 +107,5 @@ services:
 - client_config: {}
   server_config: {file_table: files}
   source: /runtime/services/anvil/files.yml
-startup: {module: Login_frm, type: form}
+startup: {module: Splash_frm, type: form}
 startup_form: null

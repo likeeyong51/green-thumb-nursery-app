@@ -1,6 +1,12 @@
 /**
  This CSS implements the Material Design 3 look and feel for Anvil apps.
  **/
+/* add a rounded corner option for images */
+.anvil-role-rounded-image {
+    border-radius: 25px; /* Adjust as needed */
+    overflow: hidden; /* Ensures corners are clipped */
+    display: inline-block;
+}
 
 /* Stop panel-cols cutting off drop shadows */
 .anvil-panel-col {
@@ -137,6 +143,7 @@ color: %color:On Primary Container%;
   font-size: 22px;
   line-height: 28px;
   font-weight: 500;
+  border-radius: 12px;
 }
 
 .anvil-role-body {
