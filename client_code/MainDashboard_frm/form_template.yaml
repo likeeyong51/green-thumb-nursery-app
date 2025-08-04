@@ -44,6 +44,14 @@ components:
     name: record_sale_btn
     properties: {font_size: 20, text: Record Sale, tooltip: Record Sales Transaction}
     type: Button
+  - event_bindings: {click: inventory_btn_click}
+    layout_properties: {grid_position: 'UVSCBH,MWQCUO'}
+    name: inventory_btn
+    properties:
+      font_size: 20
+      text: |
+        Inventory
+    type: Button
   layout_properties: {slot: left-nav}
   name: side_pnl
   properties: {}

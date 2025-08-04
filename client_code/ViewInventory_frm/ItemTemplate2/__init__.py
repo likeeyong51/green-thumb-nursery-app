@@ -13,3 +13,7 @@ class ItemTemplate2(ItemTemplate2Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
+        # get plant list from current plant inventory
+        plant_list = anvil.server.call('get_plant_list')
+        # add it to the dropdown item list
+        self.drop_down_1.items = [plant['name'] for plant in plant_list]

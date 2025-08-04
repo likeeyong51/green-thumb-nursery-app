@@ -13,3 +13,12 @@ class ViewInventory_frm(ViewInventory_frmTemplate):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
+        
+
+    def view_inventory_btn_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        plant_list = anvil.server.call('get_plant_list')
+        print([plant for plant in plant_list])
+        if plant_list:
+            self.inventory_list_rpnl.items = [plant for plant in plant_list]
+            self.inventory_crd.visible = True
