@@ -16,7 +16,7 @@ class MainDashboard_frm(MainDashboard_frmTemplate):
         # Any code you write here will run before the form opens.
         # GET user role
         self.role          = properties['user_role']
-        self.username      = properties['username']
+        self.username      = properties['username'].title()
         self.user_lbl.text = self.username
         
         if self.role == 'Manager':

@@ -11,6 +11,10 @@ unique_ids:
     RecordSale_frm: '1753938666975892482571131.9785'
     Signup_frm: '1751343048508352593317248.8254'
     Splash_frm: '1754019946110248369738373.9384'
+    ViewInventory_frm: '1754277073789273912671437.47922'
+    ViewInventory_frm.ItemTemplate1: '1754277394390724236233862.569'
+    ViewInventory_frm.ItemTemplate2: '1754277911091456490240692.2374'
+    ViewInventory_frm.RowTemplate1: '175427881640177915639032.27838'
   modules: {}
   scripts: {}
   server_modules:
