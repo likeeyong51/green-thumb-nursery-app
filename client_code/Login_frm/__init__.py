@@ -21,6 +21,10 @@ class Login_frm(Login_frmTemplate):
 
     def login_btn_click(self, **event_args):
         """This method is called when the button is clicked"""
+        if not(self.username_txb.text or self.password_txb.text):
+            alert("Please enter username and password")
+            return
+            
         # get and format the username
         email_for_login = f"{self.item['username']}@nursery.com"
         # attempt a log in

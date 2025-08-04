@@ -2,10 +2,40 @@
  This CSS implements the Material Design 3 look and feel for Anvil apps.
  **/
 /* add a rounded corner option for images */
+
+@keyframes leafSway {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(3deg); }
+    100% { transform: rotate(0deg); }
+}
+.leaf-sway {
+    animation: leafSway 3s ease-in-out infinite;
+}
+
+@keyframes leafFall {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+    50%  { transform: translateY(200px) rotate(180deg); opacity: 0.7; }
+    100% { transform: translateY(400px) rotate(360deg); opacity: 0; }
+}
+
+.anvil-role-leaf {
+    animation: leafFall 3s ease-in-out infinite;
+}
+
 .anvil-role-rounded-image {
     border-radius: 25px; /* Adjust as needed */
     overflow: hidden; /* Ensures corners are clipped */
     display: inline-block;
+    animation: leafSway 3s ease-in-out infinite;
+}
+
+button:hover {
+    box-shadow: 0 0 10px rgba(0, 255, 150, 0.6);
+    transition: box-shadow 0.3s ease;
+}
+
+body {
+    background: linear-gradient(to bottom right, #e0f7fa, #80ff77);
 }
 
 /* Stop panel-cols cutting off drop shadows */

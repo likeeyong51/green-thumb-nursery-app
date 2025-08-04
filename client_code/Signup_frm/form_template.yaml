@@ -67,7 +67,7 @@ components:
   - event_bindings: {click: signup_btn_click}
     layout_properties: {grid_position: 'HNUEPA,DNTJNY'}
     name: signup_btn
-    properties: {bold: false, icon: 'fa:thumbs-o-up', role: tonal-button, text: Sign Up}
+    properties: {bold: false, icon: 'fa:thumbs-o-up', role: outlined-button, text: Sign Up}
     type: Button
   - event_bindings: {click: cancel_btn_click}
     layout_properties: {grid_position: 'HNUEPA,YLKTNG'}
