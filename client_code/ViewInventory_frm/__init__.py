@@ -19,6 +19,7 @@ class ViewInventory_frm(ViewInventory_frmTemplate):
         """Loads and shows the plant inventory"""
         # hide the sales log card
         self.sales_log_crd.visible = False
+        
         # get plant list from current plant inventory
         plant_list = anvil.server.call('get_plant_list')
         # add it to the dropdown item list
@@ -31,4 +32,34 @@ class ViewInventory_frm(ViewInventory_frmTemplate):
 
     def sales_log_btn_click(self, **event_args):
         """loads and shows the sales log"""
-        pass
+        # hide the inventory list card
+        self.inventory_crd.visible = False
+
+        # get sales list from current sales log
+        sales_list = anvil.server.call('get_sales_list')
+
+        self.build_sales_list(sales_list)
+        # if sales_list exists
+        # if sales_list:
+        #     self.sales_list_rpnl.items = [sale for sale in sales_list]
+        #     self.sales_log_crd.visible = True
+        # else:
+        #     alert('Sales list not found.')
+
+    def date_filter_dpk_change(self, **event_args):
+        """This method is called when the selected date changes"""
+        # get the date to filter
+        date = self.date_filter_dpk.date
+        # print(date)
+        sales_list = anvil.server.call('get_sales_list', date)
+
+        self.build_sales_list(sales_list)
+        
+    def build_sales_list(self, sales_list, show=True):
+        '''build the sales list'''
+        if sales_list:
+            self.sales_list_rpnl.items = [sale for sale in sales_list]
+            self.sales_log_crd.visible = show
+        else:
+            self.sales_list_rpnl.items = None
+            alert('Sales list not found.')

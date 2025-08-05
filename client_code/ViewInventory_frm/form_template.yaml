@@ -31,6 +31,10 @@ components:
   properties: {background: 'theme:Primary Container', role: outlined-card}
   type: ColumnPanel
 - components:
+  - layout_properties: {grid_position: 'KSHKKH,SBDDVD'}
+    name: inventory_list_lbl
+    properties: {foreground: '#375d47', icon: 'fa:leaf', role: title, text: Plant Inventory}
+    type: Label
   - layout_properties: {grid_position: 'WEVHZW,IZWUVS YHOTUB,ZISSYJ'}
     name: inventory_list_rpnl
     properties: {item_template: ViewInventory_frm.ItemTemplate2}
@@ -40,8 +44,17 @@ components:
   properties: {role: outlined-card, visible: false}
   type: ColumnPanel
 - components:
-  - layout_properties: {grid_position: 'DUNQCN,TQTACV'}
-    name: date_picker_1
+  - layout_properties: {grid_position: 'DUNQCN,DFPGBK'}
+    name: sales_log_lbl
+    properties: {foreground: '#375d47', icon: 'fa:handshake-o', role: title, text: Sales Log}
+    type: Label
+  - layout_properties: {grid_position: 'DUNQCN,YZNEJD'}
+    name: spacer_1
+    properties: {height: 32}
+    type: Spacer
+  - event_bindings: {change: date_filter_dpk_change}
+    layout_properties: {grid_position: 'DUNQCN,TQTACV'}
+    name: date_filter_dpk
     properties: {}
     type: DatePicker
   - components:
@@ -59,7 +72,7 @@ components:
     type: DataGrid
   layout_properties: {grid_position: 'WLCMVD,VIRRYG YJXCYW,LFHESV'}
   name: sales_log_crd
-  properties: {role: outlined-card, visible: false}
+  properties: {col_widths: '{"YZNEJD":40,"TQTACV":20}', role: outlined-card, visible: false}
   type: ColumnPanel
 container:
   properties: {col_widths: '{"YENAFP":10,"VIRRYG":50}', visible: true}

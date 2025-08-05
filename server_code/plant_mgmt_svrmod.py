@@ -39,6 +39,29 @@ def get_plant_list():
     return False # error
 
 @anvil.server.callable
+def get_sales_list(date=None):
+    '''retrieve and returns a list of sales from the sales log'''
+    if date:
+        sales_row = app_tables.sales_log.search(sale_date=date)
+    else:
+        sales_row = app_tables.sales_log.search() # get everything
+        
+    sales_data = list()
+    
+    if sales_row:
+        for sale in sales_row:
+            sales_data.append({
+                'plant_sold'   : sale['plant_sold']['name'],
+                'quantity_sold': sale['quantity_sold'],
+                'sale_date'    : sale['sale_date'],
+                'recorded_by'  : sale['recorded_by']['email'].split('@')[0]
+            })
+        # print(sales_data)
+        return sales_data
+
+    return False # error
+
+@anvil.server.callable
 def record_sale(sale):
     # CHECK if qty sold <= available stock
     plant = app_tables.plant_inventory.get(name=sale['plant_sold'])
@@ -59,3 +82,24 @@ def record_sale(sale):
         return True, plant['stock_qty']  # sales transaction completed successfully
 
     return False, -1 # sales transaction failed
+
+# @anvil.server.callable
+# def get_sale_by_date(date):
+#     '''search and return sales record by specific date'''
+#     sales_row = app_tables.sales_log.search(sale_date=date)
+#     sales_data = list()
+    
+#     if sales_row:
+#         for sale in sales_row:
+#             sales_data.append({
+#                 'plant_sold'   : sale['plant_sold']['name'],
+#                 'quantity_sold': sale['quantity_sold'],
+#                 'sale_date'    : sale['sale_date'],
+#                 'recorded_by'  : sale['recorded_by']['email'].split('@')[0]
+#             })
+#         # print(sales_data)
+#         return sales_data
+
+#     return False # error
+
+    
