@@ -16,4 +16,4 @@ class ItemTemplate2(ItemTemplate2Template):
         # get plant list from current plant inventory
         plant_list = anvil.server.call('get_plant_list')
         # add it to the dropdown item list
-        self.drop_down_1.items = [plant['name'] for plant in plant_list]
+        self.drop_down_1.items, self.drop_down_1.selected_value = [plant['name'], plant['type'] for plant in plant_list]
