@@ -16,7 +16,9 @@ class ViewInventory_frm(ViewInventory_frmTemplate):
         
 
     def view_inventory_btn_click(self, **event_args):
-        """This method is called when the button is clicked"""
+        """Loads and shows the plant inventory"""
+        # hide the sales log card
+        self.sales_log_crd.visible = False
         # get plant list from current plant inventory
         plant_list = anvil.server.call('get_plant_list')
         # add it to the dropdown item list
@@ -26,3 +28,7 @@ class ViewInventory_frm(ViewInventory_frmTemplate):
         if plant_list:
             self.inventory_list_rpnl.items = [plant for plant in plant_list]
             self.inventory_crd.visible = True
+
+    def sales_log_btn_click(self, **event_args):
+        """loads and shows the sales log"""
+        pass

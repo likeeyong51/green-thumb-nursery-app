@@ -15,5 +15,9 @@ class ItemTemplate2(ItemTemplate2Template):
         # Any code you write here will run before the form opens.
         # get plant list from current plant inventory
         plant_list = anvil.server.call('get_plant_list')
-        # add it to the dropdown item list
-        self.drop_down_1.items, self.drop_down_1.selected_value = [plant['name'], plant['type'] for plant in plant_list]
+        # add a unique list of plant types to the dropdown list
+        # by generating a set() of plant types, which allow for unique values only
+        # and then converting it to a list()
+        self.drop_down_1.items = list({
+            plant['type'] for plant in plant_list
+        })
