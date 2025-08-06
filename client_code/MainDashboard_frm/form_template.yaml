@@ -28,35 +28,54 @@ components:
   properties: {text: Green Thumb Nursery}
   type: Label
 - components:
-  - event_bindings: {click: add_plant_btn_click}
-    layout_properties: {grid_position: 'ICLZOO,WKHMUW'}
-    name: add_plant_btn
-    properties:
-      bold: false
-      font_size: 20
-      text: |
-        Add Plant
-      tooltip: Add new plant
-      visible: false
-    type: Button
   - event_bindings: {click: record_sale_btn_click}
     layout_properties: {grid_position: 'VXHQEE,QFKEOW'}
     name: record_sale_btn
-    properties: {font_size: 20, text: Record Sale, tooltip: Record Sales Transaction}
+    properties: {font_size: 20, foreground: '#375d47', text: Record Sale, tooltip: Record Sales Transaction, visible: true}
     type: Button
   - event_bindings: {click: inventory_btn_click}
     layout_properties: {grid_position: 'UVSCBH,MWQCUO'}
     name: inventory_btn
     properties:
       font_size: 20
+      foreground: '#375d47'
       text: |
         Inventory
     type: Button
+  - components:
+    - event_bindings: {click: add_plant_btn_click}
+      layout_properties: {grid_position: 'ODYTXG,DZMRYG'}
+      name: add_plant_btn
+      properties:
+        bold: false
+        font_size: 20
+        foreground: theme:On Primary
+        role: null
+        text: |
+          Add Plant
+        tooltip: Add new plant
+        visible: true
+      type: Button
+    - event_bindings: {click: generate_report_btn_click}
+      layout_properties: {grid_position: 'UOUBIB,RPOSTQ'}
+      name: generate_reports_btn
+      properties:
+        font_size: 20
+        foreground: theme:On Primary
+        role: null
+        text: |
+          Reports
+        visible: true
+      type: Button
+    layout_properties: {grid_position: 'HVSIHV,CNYJQX'}
+    name: manager_crd
+    properties: {background: '#375d47', role: outlined-card}
+    type: ColumnPanel
   layout_properties: {slot: left-nav}
   name: side_pnl
   properties: {}
   type: ColumnPanel
 container:
-  properties: {html: '@theme:standard-page.html'}
+  properties: {background: '', html: '@theme:standard-page.html'}
   type: HtmlTemplate
 is_package: true

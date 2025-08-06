@@ -41,25 +41,27 @@ def get_plant_list():
 @anvil.server.callable
 def get_sales_list(date=None):
     '''retrieve and returns a list of sales from the sales log'''
-    if date:
-        sales_row = app_tables.sales_log.search(sale_date=date)
-    else:
-        sales_row = app_tables.sales_log.search() # get everything
-        
-    sales_data = list()
+    # fetch row based on date filter
+    sales_row = (
+        app_tables.sales_log.search(sale_date=date) if date
+        else app_tables.sales_log.search() # or get everything
+    )
+    sales_data = []
     
-    if sales_row:
-        for sale in sales_row:
-            sales_data.append({
-                'plant_sold'   : sale['plant_sold']['name'],
-                'quantity_sold': sale['quantity_sold'],
-                'sale_date'    : sale['sale_date'],
-                'recorded_by'  : sale['recorded_by']['email'].split('@')[0]
-            })
-        # print(sales_data)
-        return sales_data
+    # build the inventory list
+    for sale in sales_row or []:
+        plant = sale['plant_sold']  if sale['plant_sold'] else None
+        user  = sale['recorded_by'] if sale['recorded_by'] else None
 
-    return False # error
+        sales_data.append({
+            'plant_sold'   : plant['name'] if plant else 'Unknown',
+            'quantity_sold': sale['quantity_sold'],
+            'sale_date'    : sale['sale_date'],
+            'recorded_by'  : user['email'].split('@')[0] if user else 'Unknown'
+        })
+    # print(sales_data)
+    return sales_data if sales_data else False
+
 
 @anvil.server.callable
 def record_sale(sale):

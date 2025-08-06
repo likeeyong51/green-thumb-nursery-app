@@ -18,6 +18,6 @@ class ItemTemplate2(ItemTemplate2Template):
         # add a unique list of plant types to the dropdown list
         # by generating a set() of plant types, which allow for unique values only
         # and then converting it to a list()
-        self.drop_down_1.items = list({
+        self.type_drp.items = list({
             plant['type'] for plant in plant_list
         })

@@ -1,0 +1,98 @@
+components:
+- components:
+  - event_bindings: {click: low_stock_btn_click}
+    layout_properties: {grid_position: 'BITTCE,YWEFLR'}
+    name: low_stock_btn
+    properties:
+      font_size: 15
+      foreground: '#375d47'
+      icon: fa:hand-o-down
+      role: null
+      text: |2-
+
+        Low-Stock Report
+    type: Button
+  - event_bindings: {click: best_seller_btn_click}
+    layout_properties: {grid_position: 'MNSWKG,JONPQA'}
+    name: best_seller_btn
+    properties:
+      font_size: 16
+      foreground: '#375d47'
+      icon: fa:thumbs-o-up
+      role: null
+      text: |2-
+
+        Best-Seller Reports
+    type: Button
+  layout_properties: {grid_position: 'XOVDWK,ZFFROH'}
+  name: outlined_card_2
+  properties: {role: outlined-card}
+  type: ColumnPanel
+- components:
+  - layout_properties: {grid_position: 'VNWBWB,YBYSGH'}
+    name: low_stock_lbl
+    properties: {foreground: '#375d47', icon: 'fa:th', role: title, text: Low-Stock Report}
+    type: Label
+  - layout_properties: {grid_position: 'VNWBWB,LOVSNQ'}
+    name: spacer_1
+    properties: {height: 32}
+    type: Spacer
+  - data_bindings:
+    - {code: 'self.item[''threshold'']', property: text, writeback: true}
+    layout_properties: {full_width_row: false, grid_position: 'VNWBWB,UEDLVF'}
+    name: threshold_qty_txb
+    properties: {align: center, placeholder: Enter the threshold quantity, role: outlined, tooltip: Enter the threshold quantity to generate the low-stock report, type: number}
+    type: TextBox
+  - layout_properties: {grid_position: 'VNWBWB,CEPVQH'}
+    name: download_report_btn
+    properties: {bold: false, font_size: 20, foreground: '#375d47', icon: 'fa:arrow-down', icon_align: left_edge, text: '', tooltip: Download Low-Stock Report}
+    type: Button
+  - components:
+    - name: low_stock_rpnl
+      properties: {item_template: GenerateReport_frm.RowTemplate2}
+      type: RepeatingPanel
+    layout_properties: {grid_position: 'WVAHEX,UIFTOO'}
+    name: low_stock_grd
+    properties:
+      columns:
+      - {data_key: name, id: JKSDUP, title: Plant Name}
+      - {data_key: type, id: VJQQOR, title: Plant Type}
+      - {data_key: price, id: OJLQEN, title: Price}
+      - {data_key: stock_qty, id: LKTNYU, title: Quantity}
+      foreground: '#335544'
+    type: DataGrid
+  layout_properties: {grid_position: 'XOVDWK,CUSEMF IELPIY,YTBYVQ'}
+  name: low_stock_crd
+  properties: {col_widths: '{"LOVSNQ":30,"UEDLVF":30,"CEPVQH":5,"YBYSGH":30}', role: outlined-card, visible: false}
+  type: ColumnPanel
+- components:
+  - layout_properties: {grid_position: 'YGVKEB,KNBYGO'}
+    name: best_seller_lbl
+    properties: {foreground: '#375d47', icon: 'fa:fire', role: title, text: Best=Seller Report}
+    type: Label
+  - layout_properties: {grid_position: 'YGVKEB,EVVBAP'}
+    name: download_report_btn_copy
+    properties: {bold: false, font_size: 20, foreground: '#375d47', icon: 'fa:arrow-down', icon_align: left_edge, text: '', tooltip: Download Best-Seller Report}
+    type: Button
+  - components:
+    - name: best_seller_rpnl
+      properties: {item_template: ViewInventory_frm.RowTemplate1}
+      type: RepeatingPanel
+    layout_properties: {grid_position: 'FUDZWG,OMTRSU'}
+    name: best_seller_grd
+    properties:
+      columns:
+      - {data_key: plant_sold, expand: false, id: JKSDUP, title: Plant Sold}
+      - {data_key: quantity_sold, id: VJQQOR, title: Qty Sold}
+      - {data_key: sale_date, id: OJLQEN, title: Sold On}
+      - {data_key: recorded_by, id: VCVQIU, title: Sold by}
+      foreground: '#335544'
+    type: DataGrid
+  layout_properties: {grid_position: 'XOVDWK,CUSEMF DNFTDY,CLZXNC'}
+  name: best_sellers_crd
+  properties: {col_widths: '{"KNBYGO":57,"EVVBAP":3}', role: outlined-card, visible: false}
+  type: ColumnPanel
+container:
+  properties: {col_widths: '{"ZFFROH":13,"CUSEMF":47}'}
+  type: ColumnPanel
+is_package: true

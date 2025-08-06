@@ -37,7 +37,7 @@ components:
     type: Label
   - layout_properties: {grid_position: 'WEVHZW,IZWUVS YHOTUB,ZISSYJ'}
     name: inventory_list_rpnl
-    properties: {item_template: ViewInventory_frm.ItemTemplate2}
+    properties: {foreground: '#335544', item_template: ViewInventory_frm.ItemTemplate2}
     type: RepeatingPanel
   layout_properties: {grid_position: 'WLCMVD,VIRRYG RXOEMS,MOFBOV'}
   name: inventory_crd
@@ -55,7 +55,7 @@ components:
   - event_bindings: {change: date_filter_dpk_change}
     layout_properties: {grid_position: 'DUNQCN,TQTACV'}
     name: date_filter_dpk
-    properties: {}
+    properties: {tooltip: Filter sale transactions by date}
     type: DatePicker
   - components:
     - name: sales_list_rpnl
@@ -69,6 +69,7 @@ components:
       - {data_key: quantity_sold, id: VJQQOR, title: Qty Sold}
       - {data_key: sale_date, id: OJLQEN, title: Sold On}
       - {data_key: recorded_by, id: VCVQIU, title: Sold by}
+      foreground: '#335544'
     type: DataGrid
   layout_properties: {grid_position: 'WLCMVD,VIRRYG YJXCYW,LFHESV'}
   name: sales_log_crd
