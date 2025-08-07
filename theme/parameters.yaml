@@ -333,3 +333,5 @@ roles:
   name: input-error
 - components: [Image]
   name: rounded-image
+- components: [Button]
+  name: rounded-tab

@@ -23,7 +23,7 @@
 }
 
 .anvil-role-rounded-image {
-    border-radius: 25px; /* Adjust as needed */
+    border-radius: 25px; 
     overflow: hidden; /* Ensures corners are clipped */
     display: inline-block;
     animation: leafSway 3s ease-in-out infinite;
@@ -690,13 +690,22 @@ button.close > span, button.close {
 }
 
 .btn:active, .btn:focus, .btn:active:focus, .file-loader>label:active, .file-loader>label:focus, .file-loader>label:active:focus {
-  background-color: %color:Light Overlay 2%;
+  background-color: %color:Light Overlay 2.5%;
   background-image: none;
   outline: none;
   box-shadow: none;
   color: %color:Primary%;
 }
 
+.anvil-role-rounded-tab > .btn {
+    border-radius: 0px;
+    border: 1px solid darkolivegreen;
+    border-bottom-width: 0px;
+    border-top-left-radius: 25px; /* Adjust as needed */
+    border-top-right-radius: 25px; /* Adjust as needed */
+    display: inline-block;
+    box-shadow: 2px -1px 3px darkolivegreen;
+}
 
 .anvil-role-outlined-button > .btn, .anvil-role-outlined-button.file-loader>label {
   color: %color:Primary%;

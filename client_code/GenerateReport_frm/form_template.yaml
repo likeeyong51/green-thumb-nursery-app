@@ -1,33 +1,38 @@
 components:
-- components:
-  - event_bindings: {click: low_stock_btn_click}
-    layout_properties: {grid_position: 'BITTCE,YWEFLR'}
-    name: low_stock_btn
-    properties:
-      font_size: 15
-      foreground: '#375d47'
-      icon: fa:hand-o-down
-      role: null
-      text: |2-
+- event_bindings: {click: low_stock_btn_click}
+  layout_properties: {grid_position: 'RZDKYR,GRKGIW'}
+  name: low_stock_btn
+  properties:
+    font_size: 15
+    foreground: '#375d47'
+    icon: fa:hand-o-down
+    role: rounded-tab
+    spacing:
+      margin: [5, 0, 0, 0]
+      padding: [15, 25, 5, 25]
+    text: |2-
 
-        Low-Stock Report
-    type: Button
-  - event_bindings: {click: best_seller_btn_click}
-    layout_properties: {grid_position: 'MNSWKG,JONPQA'}
-    name: best_seller_btn
-    properties:
-      font_size: 16
-      foreground: '#375d47'
-      icon: fa:thumbs-o-up
-      role: null
-      text: |2-
+      Low-Stock Report
+  type: Button
+- event_bindings: {click: best_seller_btn_click}
+  layout_properties: {grid_position: 'RZDKYR,HYSHQW'}
+  name: best_seller_btn
+  properties:
+    font_size: 15
+    foreground: '#375d47'
+    icon: fa:thumbs-o-up
+    role: rounded-tab
+    spacing:
+      margin: [5, 0, 0, 0]
+      padding: [15, 25, 5, 25]
+    text: |2-
 
-        Best-Seller Reports
-    type: Button
-  layout_properties: {grid_position: 'XOVDWK,ZFFROH'}
-  name: outlined_card_2
-  properties: {role: outlined-card}
-  type: ColumnPanel
+      Best-Seller Report
+  type: Button
+- layout_properties: {grid_position: 'RZDKYR,WMZXTC'}
+  name: spacer_2
+  properties: {height: 32}
+  type: Spacer
 - components:
   - layout_properties: {grid_position: 'VNWBWB,YBYSGH'}
     name: low_stock_lbl
@@ -61,9 +66,14 @@ components:
       - {data_key: stock_qty, id: LKTNYU, title: Quantity}
       foreground: '#335544'
     type: DataGrid
-  layout_properties: {grid_position: 'XOVDWK,CUSEMF IELPIY,YTBYVQ'}
+  layout_properties: {grid_position: 'IELPIY,YTBYVQ'}
   name: low_stock_crd
-  properties: {col_widths: '{"LOVSNQ":30,"UEDLVF":30,"CEPVQH":5,"YBYSGH":30}', role: outlined-card, visible: false}
+  properties:
+    col_widths: '{"LOVSNQ":30,"UEDLVF":30,"CEPVQH":5,"YBYSGH":30}'
+    role: outlined-card
+    spacing:
+      margin: [0, null, null, null]
+    visible: false
   type: ColumnPanel
 - components:
   - layout_properties: {grid_position: 'YGVKEB,KNBYGO'}
@@ -88,11 +98,16 @@ components:
       - {data_key: recorded_by, id: VCVQIU, title: Sold by}
       foreground: '#335544'
     type: DataGrid
-  layout_properties: {grid_position: 'XOVDWK,CUSEMF DNFTDY,CLZXNC'}
+  layout_properties: {grid_position: 'DNFTDY,CLZXNC'}
   name: best_sellers_crd
-  properties: {col_widths: '{"KNBYGO":57,"EVVBAP":3}', role: outlined-card, visible: false}
+  properties:
+    col_widths: '{"KNBYGO":57,"EVVBAP":3}'
+    role: outlined-card
+    spacing:
+      margin: [0, null, null, null]
+    visible: false
   type: ColumnPanel
 container:
-  properties: {col_widths: '{"ZFFROH":13,"CUSEMF":47}'}
+  properties: {col_widths: '{"GRKGIW":12,"HYSHQW":12,"WMZXTC":36}'}
   type: ColumnPanel
 is_package: true
