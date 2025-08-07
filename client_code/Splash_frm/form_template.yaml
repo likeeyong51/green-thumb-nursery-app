@@ -12,15 +12,15 @@ components:
   name: spacer_2
   properties: {height: 32}
   type: Spacer
-- layout_properties: {full_width_row: false, grid_position: 'VSNRDE,RZFVHZ', row_background: ''}
+- layout_properties: {grid_position: 'VSNRDE,TRPZIN'}
   name: splash_img
   properties:
     alt_text: Green Thumb Nursery App Splash
     border_radius: ''
-    height: 391
+    height: 317
     margin: [5, null, 5, null]
     role: rounded-image
-    source: _/theme/splash_screen2.png
+    source: _/theme/splash_screen.png
     visible: true
   type: Image
 - layout_properties: {grid_position: 'VSNRDE,TTXZBK'}
@@ -28,6 +28,6 @@ components:
   properties: {height: 32}
   type: Spacer
 container:
-  properties: {col_widths: '{"PVYCXB":15,"RZFVHZ":30,"TTXZBK":15}'}
+  properties: {col_widths: '{"PVYCXB":15,"TTXZBK":15,"WHXVCV":15,"TRPZIN":15}'}
   type: ColumnPanel
 is_package: true

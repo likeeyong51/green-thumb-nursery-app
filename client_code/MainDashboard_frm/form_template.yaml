@@ -21,11 +21,20 @@ components:
   type: FlowPanel
 - layout_properties: {slot: top-left-btn}
   name: image_1
-  properties: {height: 66, source: _/theme/green_thumb_logo_1.png}
+  properties: {border_radius: '15', height: 66, source: _/theme/splash_screen.png}
   type: Image
 - layout_properties: {slot: title}
   name: label_1
-  properties: {text: Green Thumb Nursery}
+  properties:
+    bold: false
+    font_size: 25
+    foreground: '#32582d'
+    italic: false
+    spacing:
+      margin: [null, null, null, 35]
+    spacing_above: small
+    spacing_below: small
+    text: Green Thumb Nursery
   type: Label
 - components:
   - event_bindings: {click: record_sale_btn_click}

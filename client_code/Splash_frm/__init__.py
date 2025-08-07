@@ -5,7 +5,8 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-
+from anvil import js
+from anvil.js import get_dom_node
 
 class Splash_frm(Splash_frmTemplate):
     def __init__(self, **properties):
@@ -16,9 +17,22 @@ class Splash_frm(Splash_frmTemplate):
         self.timer_1.interval = 1 # 1 sec interval per tick
         self.time             = 3 # 3 secs countdown
 
+        # Delay before triggering animation
+        # anvil.js.window.setTimeout(self.start_animation, 1500)
+        self.role = "splash-container"
+
+
     def timer_1_tick(self, **event_args):
         """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
         if self.time == 0:
-            open_form('Login_frm')
+            # Add animation class to splash container
+            get_dom_node(self).classList.add("splash-animate")
+
+            # Wait for animation to finish, then open login form
+            js.window.setTimeout(self.go_to_login, 1500)
+            # open_form('Login_frm')
         else:
             self.time -= 1
+
+    def go_to_login(self):
+        open_form('Login_frm')

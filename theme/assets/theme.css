@@ -29,6 +29,47 @@
     animation: leafSway 3s ease-in-out infinite;
 }
 
+@keyframes shrinkToCorner {
+    0% {
+        transform: scale(1) translate(0, 0);
+        opacity: 1;
+    }
+    15% {
+        transform: scale(0.5) translate(30%, 30%);
+        opacity: 0.8;
+    }
+    30% {
+        transform: scale(0.4) translate(-21%, 0%);
+        opacity: 0.7;
+    }
+    45% {
+        transform: scale(0.2) translate(-20%, -10%);
+        opacity: 0.5;
+    }
+    60% {
+        transform: scale(0.1) translate(-30%, -20%);
+        opacity: 0.3;
+    }
+    75% {
+        transform: scale(0.2) translate(-40%, -35%);
+        opacity: 0.2;
+    }
+    90% {
+        transform: scale(0.3) translate(-50%, -40%);
+        opacity: 0.1;
+    }
+    100% {
+        transform: scale(0.4) translate(-50%, -50%);
+        opacity: 0;
+    }
+}
+
+.splash-animate {
+    animation: shrinkToCorner 2s ease-in-out forwards;
+    transform-origin: top left;
+}
+
+
 button:hover {
     box-shadow: 0 0 10px rgba(0, 255, 150, 0.6);
     transition: box-shadow 0.3s ease;
