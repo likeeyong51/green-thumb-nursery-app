@@ -34,6 +34,8 @@ class GenerateReport_frm(GenerateReport_frmTemplate):
 
         self.best_seller_rpnl.items = [sale for sale in sale_list_30_days_ago]
 
+        self.best_sellers_crd.visible = True
+
     def generate_btn_click(self, **event_args):
         """
         generates and displays a list of all plants where 

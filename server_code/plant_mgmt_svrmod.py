@@ -81,12 +81,20 @@ def get_best_sellers():
     thirty_days_ago = today - timedelta(days=30)
     
     # Optional: format the date as a string
-    thirty_days_ago_date = thirty_days_ago.strftime('%Y-%m-%d')
+    # thirty_days_ago_date = thirty_days_ago.strftime('%Y-%m-%d')
     sale_list_30_days = app_tables.sales_log.search(
         tables.order_by('plant_sold'),
-        sale_date=q.less_than(thirty_days_ago)
+        sale_date=q.greater_than_or_equal_to(thirty_days_ago)
     )
-    return sale_list_30_days if sale_list_30_days else False
+    sale_data = []
+    for sale in sale_list_30_days:
+        sale_data.append({
+            'plant_sold'   : sale['plant_sold']['name'],
+            'quantity_sold': sale['quantity_sold'],
+            'sale_date'    : sale['sale_date'],
+            'recorded_by'  : sale['recorded_by']['email'].split('@')[0]
+        }) 
+    return sale_data if sale_data else False
 
 @anvil.server.callable
 def record_sale(sale):
