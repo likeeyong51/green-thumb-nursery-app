@@ -122,6 +122,6 @@ components:
     visible: false
   type: ColumnPanel
 container:
-  properties: {col_widths: '{"GRKGIW":12,"HYSHQW":12,"WMZXTC":36}'}
+  properties: {col_widths: '{"GRKGIW":15,"HYSHQW":15,"WMZXTC":30}'}
   type: ColumnPanel
 is_package: true

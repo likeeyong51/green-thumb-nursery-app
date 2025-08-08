@@ -5,6 +5,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
+from datetime import datetime, timedelta
 
 # This is a server module. It runs on the Anvil server,
 # rather than in the user's browser.
@@ -33,10 +34,8 @@ def add_plant(plant_info):
 def get_plant_list():
     ''' retrieve and returns a list of plants from the inventory list'''
     plant_list = app_tables.plant_inventory.search()
-    if plant_list:
-        return plant_list
-
-    return False # error
+    
+    return plant_list if plant_list else False
 
 @anvil.server.callable
 def get_sales_list(date=None):
@@ -63,6 +62,31 @@ def get_sales_list(date=None):
     # print(sales_data)
     return sales_data if sales_data else False
 
+@anvil.server.callable
+def get_low_stock_list(threshold):
+    # GET low-stock list based on threshold
+    low_stock_list = app_tables.plant_inventory.search(
+        stock_qty=q.less_than_or_equal_to(threshold)
+    )
+
+    return low_stock_list if low_stock_list else False
+
+@anvil.server.callable
+def get_best_sellers():
+    # GET and determine the best sellers in the last 30 days
+    # Get today's date
+    today = datetime.today()
+
+    # Subtract 30 days
+    thirty_days_ago = today - timedelta(days=30)
+    
+    # Optional: format the date as a string
+    thirty_days_ago_date = thirty_days_ago.strftime('%Y-%m-%d')
+    sale_list_30_days = app_tables.sales_log.search(
+        tables.order_by('plant_sold'),
+        sale_date=q.less_than(thirty_days_ago)
+    )
+    return sale_list_30_days if sale_list_30_days else False
 
 @anvil.server.callable
 def record_sale(sale):
