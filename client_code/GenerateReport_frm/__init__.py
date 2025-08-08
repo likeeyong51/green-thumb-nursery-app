@@ -15,11 +15,10 @@ class GenerateReport_frm(GenerateReport_frmTemplate):
         # Any code you write here will run before the form opens.
 
     def low_stock_btn_click(self, **event_args):
-        """
-        generates and displays a list of all plants where 
-        the stock quantity is below a certain threshold
-        """
-        pass
+        '''reveal low stock report'''
+        self.low_stock_crd.visible = True
+        self.threshold_txb.focus()
+
 
     def best_seller_btn_click(self, **event_args):
         """
@@ -27,3 +26,23 @@ class GenerateReport_frm(GenerateReport_frmTemplate):
         sold the most units in the last 30 days
         """
         pass
+
+    def generate_btn_click(self, **event_args):
+        """
+        generates and displays a list of all plants where 
+        the stock quantity is below a certain threshold
+        """
+        # GET and VALIDATE threshold qty
+        if self.threshold_txb.text == '':
+            alert('Threshold cannot be empty.')
+            return
+        
+        try:
+            threshold_val = int(self.threshold_txb.text)
+        except:
+            alert('Threshold must be a valid integer.')
+            return
+        
+        if threshold_val < 0:
+            alert('Threshold must be greater than or equal to zero.')
+            return

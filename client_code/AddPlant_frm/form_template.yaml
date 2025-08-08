@@ -18,16 +18,18 @@ components:
       - {code: 'self.item[''name'']', property: text, writeback: true}
       layout_properties: {grid_position: 'FMBKRI,KMZVJU'}
       name: plant_name_txb
-      properties: {placeholder: Enter Plant Name here, role: outlined, tooltip: Plant Name}
+      properties: {font_size: 17, placeholder: Enter Plant Name here, role: outlined, tooltip: Plant Name}
       type: TextBox
     - data_bindings:
       - {code: 'self.item[''type'']', property: selected_value, writeback: true}
       layout_properties: {grid_position: 'FMBKRI,SSXTAI'}
       name: plant_type_drp
       properties:
-        align: left
+        align: center
+        font_size: 17
         include_placeholder: true
         items: [Herb, Indoor Foliage, Indoor Tree, Indoor Vine, Outdoor Annual, Outdoor Perennial, Outdoor Shrub, Outdoor Tree, Succulent]
+        margin: [null, 0, null, 0]
         placeholder: Select a plant type
         role: outlined
         tooltip: Plant Type
@@ -36,26 +38,29 @@ components:
       - {code: 'self.item[''price'']', property: text, writeback: true}
       layout_properties: {grid_position: 'PXXXWX,UXZPBF'}
       name: price_txb
-      properties: {placeholder: Enter Unit Price ($), role: outlined, tooltip: Plant Price, type: number}
+      properties: {align: center, font_size: 17, placeholder: Enter Unit Price ($), role: outlined, tooltip: Plant Price, type: number}
       type: TextBox
     - data_bindings:
       - {code: 'self.item[''stock_qty'']', property: text, writeback: true}
-      layout_properties: {grid_position: 'OZLIGQ,FGIUCF'}
+      layout_properties: {grid_position: 'PXXXWX,UXJNZA'}
       name: initial_stock_qty_txb
-      properties: {placeholder: Enter Initial Stock Quantity, role: outlined, tooltip: Initial Stock Quantity, type: number}
+      properties: {align: center, font_size: 17, placeholder: Enter Initial Stock Quantity, role: outlined, tooltip: Initial Stock Quantity, type: number}
       type: TextBox
     - event_bindings: {click: add_to_inventory_btn_click}
-      layout_properties: {grid_position: 'NMAIQN,YZRFJV'}
+      layout_properties: {grid_position: 'PXXXWX,BBEZYI'}
       name: add_to_inventory_btn
       properties:
+        align: center
+        font_size: 17
+        icon: fa:plus
         role: outlined-button
         spacing:
-          margin: [16, null, null, null]
+          margin: [2, null, null, null]
         text: Add to Inventory
       type: Button
     layout_properties: {grid_position: 'UYKFYX,AVLHHG'}
     name: add_plant_pnl
-    properties: {col_widths: '{"KMZVJU":48,"SSXTAI":12}', spacing_below: small}
+    properties: {col_widths: '{"KMZVJU":45,"SSXTAI":15,"UXZPBF":20,"UXJNZA":25,"BBEZYI":15}', spacing_below: small}
     type: ColumnPanel
   layout_properties: {grid_position: 'IKRRRI,BHUKNI'}
   name: outlined_card_1

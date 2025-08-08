@@ -22,8 +22,9 @@ class AddPlant_frm(AddPlant_frmTemplate):
         if not(
             self.plant_name_txb.text and 
             self.plant_type_drp.selected_value and 
-            self.price_txb.text and 
-            self.initial_stock_qty_txb.text):
+            self.price_txb.text and self.item['price'] >= 0 and
+            self.initial_stock_qty_txb.text and self.item['stock_qty'] >= 0
+        ):
             # if any fields are blank, show error message
             alert('All fields cannot be empty. Please enter a new plant information again.')
             return # stop execution
