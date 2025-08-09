@@ -125,13 +125,15 @@ def download_low_stock_pdf(threshold):
     c = canvas.Canvas(buffer, pagesize=A4)
     width, height = A4
 
-    c.setFont("Helvetica", 12)
+    c.setFont("Helvetica-Bold", 17)
     y = height - 50
-    c.drawString(50, y, f"Low Stock Report (Threshold ≤ {threshold})")
+    today = datetime.today().strftime('%w %d-%M-%Y')
+    c.drawString(50, y, f"Low Stock Report (Threshold ≤ {threshold} on {today})")
     y -= 30
-
-    for row in rows:
-        line = f"{row['name']} — Qty: {row['stock_qty']}, Type: {row['type'] if row['type'] else 'Uncategorised'}, Unit Price: ${row['price']:.2f}"
+    c.setFont("Helvetica", 12)
+    
+    for n, row in enumerate(rows, 1):
+        line = f"{n}. {row['name']} — Qty: {row['stock_qty']}, Type: {row['type'] if row['type'] else 'Uncategorised'}, Unit Price: ${row['price']:.2f}"
         c.drawString(50, y, line)
         y -= 20
         if y < 50:
@@ -204,7 +206,7 @@ def download_best_sellers_json():
 def download_best_sellers_csv():
     data = get_best_sellers()
     output = io.StringIO()
-    writer = csv.DictWriter(output, fieldnames=["plant_name", "total_quantity_sold", "total_sales_amount"])
+    writer = csv.DictWriter(output, fieldnames=["plant_name", "total_sold", "unit_price", "total_sales"])
     writer.writeheader()
     writer.writerows(data)
     return BlobMedia("text/csv", output.getvalue().encode('utf-8'), name="best_sellers.csv")
@@ -216,13 +218,15 @@ def download_best_sellers_pdf():
     c = canvas.Canvas(buffer, pagesize=A4)
     width, height = A4
 
-    c.setFont("Helvetica", 12)
+    c.setFont("Helvetica-Bold", 17)
     y = height - 50
-    c.drawString(50, y, "Best Sellers Report")
+    today = datetime.today().strftime('%d-%M-%Y')
+    c.drawString(50, y, f"Best Sellers Report ({today})")
+    c.setFont("Helvetica", 12)
     y -= 30
 
-    for item in data:
-        line = f"{item['plant_name']}(${item['unit_price']:.2f}): {item['total_quantity_sold']} sold, ${item['total_sales_amount']:.2f}"
+    for n, item in enumerate(data, 1):
+        line = f"{n}. {item['plant_name']}(${item['unit_price']}): {item['total_sold']} sold, ${item['total_sales']:.2f}"
         c.drawString(50, y, line)
         y -= 20
         if y < 50:

@@ -65,6 +65,7 @@ class GenerateReport_frm(GenerateReport_frmTemplate):
             return
 
         # GET low-stock report
+        self.threshold = threshold_val
         self.low_stock_list = anvil.server.call('get_low_stock_list', threshold_val)
 
         if not self.low_stock_list or len(self.low_stock_list) == 0:
@@ -93,14 +94,14 @@ class GenerateReport_frm(GenerateReport_frmTemplate):
         file_format = self.file_format_drp.selected_value
 
         if file_format == 'JSON':
-            # GENERATE and DOWNLOAD json file
-            media = anvil.server.call('download_low_stock_json')
+            # GENERATE json file
+            media = anvil.server.call('download_low_stock_json', self.threshold)
         elif file_format == 'CSV':
-            # GENERATE and DOWNLOAD csv file
-            media = anvil.server.call('download_low_stock_csv')
+            # GENERATE csv file
+            media = anvil.server.call('download_low_stock_csv', self.threshold)
         else:
-            # GENERATE amd DOWNLOAD pdf file
-            media = anvil.server.call('download_low_stock_pdf')
+            # GENERATE pdf file
+            media = anvil.server.call('download_low_stock_pdf', self.threshold)
 
         if media:
             anvil.media.download(media)
@@ -116,17 +117,17 @@ class GenerateReport_frm(GenerateReport_frmTemplate):
         file_format = self.file_format_drp2.selected_value
 
         if file_format == 'JSON':
-            # GENERATE and DOWNLOAD json file
+            # GENERATE json file
             media = anvil.server.call('download_best_sellers_json')
         elif file_format == 'CSV':
-            # GENERATE and DOWNLOAD csv file
+            # GENERATE csv file
             media = anvil.server.call('download_best_sellers_csv')
         else:
-            # GENERATE amd DOWNLOAD pdf file
+            # GENERATE pdf file
             media = anvil.server.call('download_best_sellers_pdf')
 
         # DOWNLOAD report
         if media:
             anvil.media.download(media)
         else:
-            alert('No low-stock items found.')
+            alert('No best-seller items found.')
