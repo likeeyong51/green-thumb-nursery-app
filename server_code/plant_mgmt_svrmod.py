@@ -127,7 +127,7 @@ def download_low_stock_pdf(threshold):
 
     c.setFont("Helvetica-Bold", 17)
     y = height - 50
-    today = datetime.today().strftime('%w %d-%M-%Y')
+    today = datetime.today().strftime('%a %d-%M-%Y')
     c.drawString(50, y, f"Low Stock Report (Threshold ≤ {threshold} on {today})")
     y -= 30
     c.setFont("Helvetica", 12)
@@ -220,7 +220,7 @@ def download_best_sellers_pdf():
 
     c.setFont("Helvetica-Bold", 17)
     y = height - 50
-    today = datetime.today().strftime('%d-%M-%Y')
+    today = datetime.today().strftime('%a %d-%M-%Y')
     c.drawString(50, y, f"Best Sellers Report ({today})")
     c.setFont("Helvetica", 12)
     y -= 30
