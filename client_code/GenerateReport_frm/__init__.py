@@ -42,7 +42,8 @@ class GenerateReport_frm(GenerateReport_frmTemplate):
             
         # populate best seller grid
         self.best_seller_rpnl.items = [sale for sale in sale_list_30_days_ago]
-        self.download_bs_report_btn.enabled = True
+        # self.download_bs_report_btn.enabled = True
+        self.file_format_drp2.visible = True #if not self.file_format_drp2.visible else False
 
     def generate_btn_click(self, **event_args):
         """
@@ -75,7 +76,8 @@ class GenerateReport_frm(GenerateReport_frmTemplate):
         
         # show low-stock list
         self.low_stock_rpnl.items = [plant for plant in self.low_stock_list]
-        self.download_ls_report_btn.enabled = True
+        # self.download_ls_report_btn.enabled = True
+        self.file_format_drp.visible = True #if not self.file_format_drp.visible else False
 
     def download_ls_report_btn_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -124,7 +126,7 @@ class GenerateReport_frm(GenerateReport_frmTemplate):
             media = anvil.server.call('download_best_sellers_csv')
         else:
             # GENERATE pdf file
-            media = anvil.server.call('download_best_sellers_pdf')
+            media = anvil.server.call('download_best_sellers_pdf2')
 
         # DOWNLOAD report
         if media:
