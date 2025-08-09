@@ -34,7 +34,7 @@ class Login_frm(Login_frmTemplate):
             anvil.open_form(
                 'MainDashboard_frm',
                 user_role = anvil.server.call('get_user_role', email_for_login),
-                username = self.item['username']
+                username  = self.item['username']
             )
         except anvil.users.AuthenticationFailed as e:
             alert(str(e))

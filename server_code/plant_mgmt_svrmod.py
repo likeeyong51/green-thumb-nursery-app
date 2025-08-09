@@ -6,6 +6,12 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
 from datetime import datetime, timedelta
+import json
+import csv
+import io
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import A4
+from anvil import BlobMedia
 
 # This is a server module. It runs on the Anvil server,
 # rather than in the user's browser.
@@ -72,29 +78,159 @@ def get_low_stock_list(threshold):
     return low_stock_list if low_stock_list else False
 
 @anvil.server.callable
+def download_low_stock_json(threshold):
+    rows = get_low_stock_list(threshold)
+    if not rows:
+        return False
+
+    data = [
+        {
+            'name'     : row['name'],
+            'type'     : row['type'] if row['type'] else 'Uncategorised',
+            'price'    : row['price'],
+            'stock_qty': row['stock_qty']
+        }
+        for row in rows
+    ]
+
+    json_str = json.dumps(data, indent=2)
+    return BlobMedia("application/json", json_str.encode('utf-8'), name="low_stock_report.json")
+
+@anvil.server.callable
+def download_low_stock_csv(threshold):
+    rows = get_low_stock_list(threshold)
+    if not rows:
+        return False
+
+    output = io.StringIO()
+    writer = csv.DictWriter(output, fieldnames=["name", "type", "price", "stock_qty"])
+    writer.writeheader()
+    for row in rows:
+        writer.writerow({
+            'name'     : row['name'],
+            'type'     : row['type'] if row['type'] else 'Uncategorised',
+            'price'    : row['price'],
+            'stock_qty': row['stock_qty']
+        })
+
+    return BlobMedia("text/csv", output.getvalue().encode('utf-8'), name="low_stock_report.csv")
+
+@anvil.server.callable
+def download_low_stock_pdf(threshold):
+    rows = get_low_stock_list(threshold)
+    if not rows:
+        return False
+
+    buffer = io.BytesIO()
+    c = canvas.Canvas(buffer, pagesize=A4)
+    width, height = A4
+
+    c.setFont("Helvetica", 12)
+    y = height - 50
+    c.drawString(50, y, f"Low Stock Report (Threshold ≤ {threshold})")
+    y -= 30
+
+    for row in rows:
+        line = f"{row['name']} — Qty: {row['stock_qty']}, Type: {row['type'] if row['type'] else 'Uncategorised'}, Unit Price: ${row['price']:.2f}"
+        c.drawString(50, y, line)
+        y -= 20
+        if y < 50:
+            c.showPage()
+            y = height - 50
+
+    c.save()
+    return BlobMedia("application/pdf", buffer.getvalue(), name="low_stock_report.pdf")
+
+@anvil.server.callable
 def get_best_sellers():
     # GET and determine the best sellers in the last 30 days
     # Get today's date
     today = datetime.today()
 
-    # Subtract 30 days
+    # Subtract 30 daysjson
     thirty_days_ago = today - timedelta(days=30)
     
     # Optional: format the date as a string
     # thirty_days_ago_date = thirty_days_ago.strftime('%Y-%m-%d')
     sale_list_30_days = app_tables.sales_log.search(
-        tables.order_by('plant_sold'),
         sale_date=q.greater_than_or_equal_to(thirty_days_ago)
     )
-    sale_data = []
+
+    # AGGREGATE sales by plant
+    plant_sales = {}
     for sale in sale_list_30_days:
-        sale_data.append({
-            'plant_sold'   : sale['plant_sold']['name'],
-            'quantity_sold': sale['quantity_sold'],
-            'sale_date'    : sale['sale_date'],
-            'recorded_by'  : sale['recorded_by']['email'].split('@')[0]
-        }) 
-    return sale_data if sale_data else False
+        plant    = sale['plant_sold']
+        quantity = sale['quantity_sold']
+
+        if plant:
+            plant_name = plant['name']
+            unit_price = plant['price'] if plant['price'] else 0
+            total_sale = quantity * unit_price
+            
+            if plant_name in plant_sales:
+                plant_sales[plant_name]['total_quantity'] += quantity
+                plant_sales[plant_name]['total_sales']    += total_sale
+            else:
+                plant_sales[plant_name]    = {
+                    'total_quantity' : quantity,
+                    'total_sales'    : total_sale,
+                    'unit_price'     : unit_price
+                }
+
+    # CONVERT to sorted list of dicts
+    sort_sales = sorted(
+        [
+            {
+                'plant_name'  : name,
+                'total_sold'  : sale_data['total_quantity'],
+                'unit_price'  : f"{sale_data['unit_price']:.2f}",
+                'total_sales' : round(sale_data['total_sales'], 2)
+            }
+            for name, sale_data in plant_sales.items()
+        ],
+        key = lambda x: x['total_sales'],
+        reverse = True
+    )
+    
+    return sort_sales if sort_sales else False
+    
+@anvil.server.callable
+def download_best_sellers_json():
+    data = get_best_sellers()
+    json_str = json.dumps(data, indent=4)
+    return BlobMedia("application/json", json_str.encode('utf-8'), name="best_sellers.json")
+
+@anvil.server.callable
+def download_best_sellers_csv():
+    data = get_best_sellers()
+    output = io.StringIO()
+    writer = csv.DictWriter(output, fieldnames=["plant_name", "total_quantity_sold", "total_sales_amount"])
+    writer.writeheader()
+    writer.writerows(data)
+    return BlobMedia("text/csv", output.getvalue().encode('utf-8'), name="best_sellers.csv")
+
+@anvil.server.callable
+def download_best_sellers_pdf():
+    data = get_best_sellers()
+    buffer = io.BytesIO()
+    c = canvas.Canvas(buffer, pagesize=A4)
+    width, height = A4
+
+    c.setFont("Helvetica", 12)
+    y = height - 50
+    c.drawString(50, y, "Best Sellers Report")
+    y -= 30
+
+    for item in data:
+        line = f"{item['plant_name']}(${item['unit_price']:.2f}): {item['total_quantity_sold']} sold, ${item['total_sales_amount']:.2f}"
+        c.drawString(50, y, line)
+        y -= 20
+        if y < 50:
+            c.showPage()
+            y = height - 50
+
+    c.save()
+    return BlobMedia("application/pdf", buffer.getvalue(), name="best_sellers.pdf")
 
 @anvil.server.callable
 def record_sale(sale):

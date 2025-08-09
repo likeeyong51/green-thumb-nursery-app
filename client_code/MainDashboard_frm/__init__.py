@@ -43,11 +43,33 @@ class MainDashboard_frm(MainDashboard_frmTemplate):
 
     def inventory_btn_click(self, **event_args):
         """load the show-inventory screen"""
-        self.load_pnl.clear()
-        self.load_pnl.add_component(ViewInventory_frm(username=self.username))
+        self.sales_log_btn.visible      = True if not self.sales_log_btn.visible        else False
+        self.view_inventory_btn.visible = True if not self.view_inventory_btn.visible   else False
+        self.inventory_btn.icon         = 'fa:arrow-down' if self.sales_log_btn.visible else 'fa:arrow-right'
 
     def generate_report_btn_click(self, **event_args):
         """load the generate-report screen"""
+        self.low_stock_btn.visible     = True if not self.low_stock_btn.visible   else False
+        self.best_seller_btn.visible   = True if not self.best_seller_btn.visible else False
+        self.generate_reports_btn.icon = 'fa:arrow-down' if self.low_stock_btn.visible else 'fa:arrow-right'
+        
+    def sales_log_btn_click(self, **event_args):
+        """This method is called when the button is clicked"""
         self.load_pnl.clear()
-        self.load_pnl.add_component(GenerateReport_frm(username=self.username))
+        self.load_pnl.add_component(ViewInventory_frm(show='sales'))
+
+    def view_inventory_btn_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        self.load_pnl.clear()
+        self.load_pnl.add_component(ViewInventory_frm(show='inventory'))
+
+    def low_stock_btn_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        self.load_pnl.clear()
+        self.load_pnl.add_component(GenerateReport_frm(show='low-stock'))
+
+    def best_seller_btn_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        self.load_pnl.clear()
+        self.load_pnl.add_component(GenerateReport_frm(show='best-seller'))
         

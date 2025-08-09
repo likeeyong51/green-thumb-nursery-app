@@ -1,38 +1,4 @@
 components:
-- event_bindings: {click: low_stock_btn_click}
-  layout_properties: {grid_position: 'RZDKYR,GRKGIW'}
-  name: low_stock_btn
-  properties:
-    font_size: 15
-    foreground: '#375d47'
-    icon: fa:hand-o-down
-    role: rounded-tab
-    spacing:
-      margin: [5, 0, 0, 0]
-      padding: [15, 25, 5, 25]
-    text: |2-
-
-      Low-Stock Report
-  type: Button
-- event_bindings: {click: best_seller_btn_click}
-  layout_properties: {grid_position: 'RZDKYR,HYSHQW'}
-  name: best_seller_btn
-  properties:
-    font_size: 15
-    foreground: '#375d47'
-    icon: fa:thumbs-o-up
-    role: rounded-tab
-    spacing:
-      margin: [5, 0, 0, 0]
-      padding: [15, 25, 5, 25]
-    text: |2-
-
-      Best-Seller Report
-  type: Button
-- layout_properties: {grid_position: 'RZDKYR,WMZXTC'}
-  name: spacer_2
-  properties: {height: 32}
-  type: Spacer
 - components:
   - layout_properties: {grid_position: 'VNWBWB,YBYSGH'}
     name: low_stock_lbl
@@ -53,19 +19,30 @@ components:
     layout_properties: {grid_position: 'VNWBWB,FHKLNY'}
     name: generate_btn
     properties:
-      align: left
+      align: center
       font_size: 17
       icon: fa:check
-      icon_align: left
+      icon_align: top
       role: null
       spacing:
         padding: [null, null, null, 0]
       text: ''
     type: Button
-  - layout_properties: {grid_position: 'VNWBWB,CEPVQH'}
-    name: download_report_btn
-    properties: {bold: false, enabled: false, font_size: 20, foreground: '#375d47', icon: 'fa:arrow-down', icon_align: left_edge, text: '', tooltip: Download Low-Stock Report}
+  - event_bindings: {click: download_ls_report_btn_click}
+    layout_properties: {grid_position: 'VNWBWB,TNLYEH'}
+    name: download_ls_report_btn
+    properties: {bold: false, enabled: false, font_size: 20, foreground: '#375d47', icon: 'fa:arrow-down', icon_align: top, spacing_below: none, text: '', tooltip: Download Low-Stock Report}
     type: Button
+  - event_bindings: {change: file_format_drp_change}
+    layout_properties: {grid_position: 'VNWBWB,RCQMRJ'}
+    name: file_format_drp
+    properties:
+      include_placeholder: true
+      items: [JSON, CSV, PDF]
+      placeholder: Format
+      role: outlined
+      visible: false
+    type: DropDown
   - components:
     - name: low_stock_rpnl
       properties: {item_template: GenerateReport_frm.RowTemplate2}
@@ -83,7 +60,7 @@ components:
   layout_properties: {grid_position: 'IELPIY,YTBYVQ'}
   name: low_stock_crd
   properties:
-    col_widths: '{"LOVSNQ":44,"UEDLVF":18,"CEPVQH":7,"YBYSGH":30,"FHKLNY":8}'
+    col_widths: '{"LOVSNQ":40,"UEDLVF":20,"YBYSGH":30,"FHKLNY":7,"RCQMRJ":15,"TNLYEH":8}'
     role: outlined-card
     spacing:
       margin: [0, null, null, null]
@@ -92,12 +69,23 @@ components:
 - components:
   - layout_properties: {grid_position: 'YGVKEB,KNBYGO'}
     name: best_seller_lbl
-    properties: {foreground: '#375d47', icon: 'fa:fire', role: title, text: Best=Seller Report}
+    properties: {foreground: '#375d47', icon: 'fa:fire', role: title, text: Best-Seller Report}
     type: Label
-  - layout_properties: {grid_position: 'YGVKEB,EVVBAP'}
-    name: download_report_btn_copy
-    properties: {bold: false, font_size: 20, foreground: '#375d47', icon: 'fa:arrow-down', icon_align: left_edge, text: '', tooltip: Download Best-Seller Report}
+  - event_bindings: {click: download_bs_report_btn_click}
+    layout_properties: {grid_position: 'YGVKEB,EVVBAP'}
+    name: download_bs_report_btn
+    properties: {bold: false, enabled: false, font_size: 20, foreground: '#375d47', icon: 'fa:arrow-down', icon_align: top, text: '', tooltip: Download Best-Seller Report}
     type: Button
+  - event_bindings: {change: file_format_drp2_change}
+    layout_properties: {grid_position: 'YGVKEB,MNHVCJ'}
+    name: file_format_drp2
+    properties:
+      include_placeholder: true
+      items: [JSON, CSV, PDF]
+      placeholder: Format
+      role: outlined
+      visible: false
+    type: DropDown
   - components:
     - name: best_seller_rpnl
       properties: {item_template: ViewInventory_frm.RowTemplate1}
@@ -106,22 +94,23 @@ components:
     name: best_seller_grd
     properties:
       columns:
-      - {data_key: plant_sold, expand: false, id: JKSDUP, title: Plant Sold}
-      - {data_key: quantity_sold, id: VJQQOR, title: Qty Sold}
-      - {data_key: sale_date, id: OJLQEN, title: Sold On}
-      - {data_key: recorded_by, id: VCVQIU, title: Sold by}
+      - {data_key: plant_name, expand: false, id: JKSDUP, title: Plant}
+      - {data_key: total_sold, id: VJQQOR, title: Total Sold}
+      - {data_key: unit_price, id: MYHFPX, title: Unit Price ($)}
+      - {data_key: total_sales, id: OJLQEN, title: Total ($)}
       foreground: '#335544'
+      rows_per_page: 10
     type: DataGrid
   layout_properties: {grid_position: 'DNFTDY,CLZXNC'}
   name: best_sellers_crd
   properties:
-    col_widths: '{"KNBYGO":57,"EVVBAP":3}'
+    col_widths: '{"KNBYGO":65,"EVVBAP":5,"MNHVCJ":10}'
     role: outlined-card
     spacing:
       margin: [0, null, null, null]
     visible: false
   type: ColumnPanel
 container:
-  properties: {col_widths: '{"GRKGIW":15,"HYSHQW":15,"WMZXTC":30}'}
+  properties: {col_widths: '{"WMZXTC":30}'}
   type: ColumnPanel
 is_package: true

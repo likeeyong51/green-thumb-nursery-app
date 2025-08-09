@@ -15,7 +15,7 @@ class Splash_frm(Splash_frmTemplate):
 
         # Any code you write here will run before the form opens.
         self.timer_1.interval = 1 # 1 sec interval per tick
-        self.time             = 3 # 3 secs countdown
+        self.time             = 2 # 2 secs countdown
 
         # Delay before triggering animation
         # anvil.js.window.setTimeout(self.start_animation, 1500)

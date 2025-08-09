@@ -13,14 +13,22 @@ class GenerateReport_frm(GenerateReport_frmTemplate):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
+        show = properties['show']
 
-    def low_stock_btn_click(self, **event_args):
-        '''reveal low stock report'''
-        self.low_stock_crd.visible = True
-        self.threshold_txb.focus()
+        if show == 'low-stock':
+            '''reveal low stock report'''
+            self.low_stock_crd.visible    = True
+            self.best_sellers_crd.visible = False
+            # delay focus slightly to ensure the form is rendered first
+            anvil.js.window.setTimeout(lambda: self.threshold_txb.focus(), 100)
+            
+        else:
+            self.low_stock_crd.visible    = False
+            self.best_sellers_crd.visible = True
 
-
-    def best_seller_btn_click(self, **event_args):
+            self.show_best_sellers()
+            
+    def show_best_sellers(self):
         """
         calculates and displays a summary of which plants have 
         sold the most units in the last 30 days
@@ -31,10 +39,10 @@ class GenerateReport_frm(GenerateReport_frmTemplate):
         if not sale_list_30_days_ago or len(sale_list_30_days_ago) == 0:
             alert('No best seller in the last 30 days')
             return
-
+            
+        # populate best seller grid
         self.best_seller_rpnl.items = [sale for sale in sale_list_30_days_ago]
-
-        self.best_sellers_crd.visible = True
+        self.download_bs_report_btn.enabled = True
 
     def generate_btn_click(self, **event_args):
         """
@@ -61,7 +69,64 @@ class GenerateReport_frm(GenerateReport_frmTemplate):
 
         if not self.low_stock_list or len(self.low_stock_list) == 0:
             alert('Low-stock list is not available.  Please try a different threshold number.')
+            self.threshold_txb.focus()
             return
         
         # show low-stock list
         self.low_stock_rpnl.items = [plant for plant in self.low_stock_list]
+        self.download_ls_report_btn.enabled = True
+
+    def download_ls_report_btn_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        self.file_format_drp.visible = True if not self.file_format_drp.visible else False
+
+    def download_bs_report_btn_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        self.file_format_drp2.visible = True if not self.file_format_drp2.visible else False
+
+    def file_format_drp_change(self, **event_args):
+        """This method is called when an item is selected"""
+        if self.file_format_drp.selected_value is None:
+            alert('Please select a file format to download')
+            return
+
+        file_format = self.file_format_drp.selected_value
+
+        if file_format == 'JSON':
+            # GENERATE and DOWNLOAD json file
+            media = anvil.server.call('download_low_stock_json')
+        elif file_format == 'CSV':
+            # GENERATE and DOWNLOAD csv file
+            media = anvil.server.call('download_low_stock_csv')
+        else:
+            # GENERATE amd DOWNLOAD pdf file
+            media = anvil.server.call('download_low_stock_pdf')
+
+        if media:
+            anvil.media.download(media)
+        else:
+            alert('No low-stock items found.')
+
+    def file_format_drp2_change(self, **event_args):
+        """This method is called when an item is selected"""
+        if self.file_format_drp2.selected_value is None:
+            alert('Please select a file format to download')
+            return
+
+        file_format = self.file_format_drp2.selected_value
+
+        if file_format == 'JSON':
+            # GENERATE and DOWNLOAD json file
+            media = anvil.server.call('download_best_sellers_json')
+        elif file_format == 'CSV':
+            # GENERATE and DOWNLOAD csv file
+            media = anvil.server.call('download_best_sellers_csv')
+        else:
+            # GENERATE amd DOWNLOAD pdf file
+            media = anvil.server.call('download_best_sellers_pdf')
+
+        # DOWNLOAD report
+        if media:
+            anvil.media.download(media)
+        else:
+            alert('No low-stock items found.')
