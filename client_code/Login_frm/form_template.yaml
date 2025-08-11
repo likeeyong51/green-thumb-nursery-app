@@ -10,17 +10,35 @@ components:
       icon: fa:leaf
       role: title
       spacing:
-        margin: [12, null, 25, null]
-        padding: [15, null, 15, null]
+        margin: [12, null, 15, null]
+        padding: [25, null, 25, null]
       text: G.T. N. Log In
     type: Label
   - components:
+    - layout_properties: {grid_position: 'KPXKCH,UIEOMY'}
+      name: label_2
+      properties:
+        font_size: 20
+        icon: fa:user
+        icon_align: left_edge
+        spacing:
+          padding: [22, null, null, null]
+      type: Label
     - data_bindings:
       - {code: 'self.item[''username'']', property: text, writeback: true}
       layout_properties: {grid_position: 'KPXKCH,HSZIKL'}
       name: username_txb
       properties: {bold: false, placeholder: Username, role: outlined, tooltip: Enter your username}
       type: TextBox
+    - layout_properties: {grid_position: 'KPXKCH,GMCLHP'}
+      name: label_2_copy
+      properties:
+        font_size: 20
+        icon: fa:key
+        icon_align: left_edge
+        spacing:
+          padding: [22, null, null, null]
+      type: Label
     - data_bindings:
       - {code: 'self.item[''password'']', property: text, writeback: true}
       event_bindings: {pressed_enter: login_btn_click}
@@ -31,14 +49,14 @@ components:
     - event_bindings: {click: login_btn_click}
       layout_properties: {grid_position: 'KPXKCH,DSFSAS'}
       name: login_btn
-      properties: {bold: false, icon: 'fa:500px', role: outlined-button, text: Log in}
+      properties: {bold: false, icon: 'fa:sign-in', role: outlined-button, text: Log in}
       type: Button
     - event_bindings: {click: signup_lnk_click}
       layout_properties: {grid_position: 'KPXKCH,WYIYHA'}
       name: signup_lnk
       properties:
         font_size: 13
-        icon: fa:adn
+        icon: fa:500px
         icon_align: left_edge
         spacing:
           margin: [0, null, 0, null]
@@ -47,11 +65,11 @@ components:
       type: Link
     layout_properties: {grid_position: 'GTFKTB,TZCXLF'}
     name: outlined_card_1
-    properties: {col_widths: '{"HSZIKL":20,"SWGSNX":20,"DSFSAS":10,"WYIYHA":10}', role: outlined-card}
+    properties: {col_widths: '{"HSZIKL":27,"SWGSNX":24,"DSFSAS":13,"WYIYHA":12,"UIEOMY":3,"GMCLHP":3}', role: outlined-card}
     type: ColumnPanel
   - layout_properties: {grid_position: 'IXGWJZ,JPCUKT'}
     name: spacer_1
-    properties: {height: 11}
+    properties: {height: 20}
     type: Spacer
   - components:
     - layout_properties: {grid_position: 'FOEFHR,OVTDQU'}
@@ -80,8 +98,10 @@ components:
     bold: false
     font_size: 25
     foreground: '#32582d'
+    role: headline
     spacing:
-      margin: [null, null, null, 35]
+      margin: [null, null, null, 25]
+      padding: [15, null, null, null]
     text: Green Thumb Nursery
   type: Label
 container:

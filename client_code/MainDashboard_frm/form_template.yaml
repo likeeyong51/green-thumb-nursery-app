@@ -13,11 +13,11 @@ components:
     - {code: 'self.item[''username'']', property: text, writeback: false}
     layout_properties: {}
     name: user_lbl
-    properties: {icon: 'fa:address-book-o'}
+    properties: {font_size: 20, icon: 'fa:address-book-o', role: title, tooltip: User}
     type: Label
   layout_properties: {slot: nav-right}
   name: navbar_links
-  properties: {}
+  properties: {tooltip: ''}
   type: FlowPanel
 - layout_properties: {slot: top-left-btn}
   name: image_1
@@ -30,8 +30,10 @@ components:
     font_size: 25
     foreground: '#32582d'
     italic: false
+    role: title
     spacing:
-      margin: [null, null, null, 35]
+      margin: [null, null, null, 25]
+      padding: [15, null, 5, null]
     spacing_above: small
     spacing_below: small
     text: Green Thumb Nursery
@@ -40,7 +42,7 @@ components:
   - event_bindings: {click: record_sale_btn_click}
     layout_properties: {grid_position: 'VXHQEE,QFKEOW'}
     name: record_sale_btn
-    properties: {font_size: 20, foreground: '#375d47', text: Record Sale, tooltip: Record Sales Transaction, visible: true}
+    properties: {font_size: 20, foreground: '#375d47', icon: 'fa:file-o', text: Record Sale, tooltip: Record Sales Transaction, visible: true}
     type: Button
   - event_bindings: {click: inventory_btn_click}
     layout_properties: {grid_position: 'FUVEYZ,VWJRXO'}
@@ -67,7 +69,7 @@ components:
       font_size: 15
       foreground: '#375d47'
       icon: fa:eye
-      role: null
+      role: rounded-tab
       spacing:
         margin: [0, 0, 0, null]
         padding: [3, 5, 5, 25]
@@ -84,7 +86,7 @@ components:
       foreground: '#375d47'
       icon: fa:list
       icon_align: left
-      role: null
+      role: rounded-tab
       spacing:
         margin: [0, 0, 0, null]
         padding: [8, 5, 5, 25]
@@ -100,6 +102,7 @@ components:
         bold: false
         font_size: 20
         foreground: theme:On Primary
+        icon: fa:leaf
         role: null
         text: |
           Add Plant
@@ -130,7 +133,7 @@ components:
         font_size: 15
         foreground: theme:On Primary
         icon: fa:hand-o-down
-        role: null
+        role: rounded-tab
         spacing:
           margin: [5, 0, 3, 0]
           padding: [5, 7, 5, 25]
@@ -146,7 +149,7 @@ components:
         font_size: 15
         foreground: theme:On Primary
         icon: fa:thumbs-o-up
-        role: null
+        role: rounded-tab
         spacing:
           margin: [5, 0, 0, 0]
           padding: [5, 5, 5, 25]
@@ -156,8 +159,17 @@ components:
       type: Button
     layout_properties: {grid_position: 'HVSIHV,CNYJQX'}
     name: manager_crd
-    properties: {background: '#375d47', role: outlined-card}
+    properties:
+      background: '#375d47'
+      role: outlined-card
+      spacing:
+        padding: [null, 12, null, 12]
     type: ColumnPanel
+  - event_bindings: {click: logout_btn_click}
+    layout_properties: {grid_position: 'MYVQVO,TRPIMK'}
+    name: logout_btn
+    properties: {font_size: 17, icon: 'fa:sign-out', text: Log out, tooltip: Log out}
+    type: Button
   layout_properties: {slot: left-nav}
   name: side_pnl
   properties: {}

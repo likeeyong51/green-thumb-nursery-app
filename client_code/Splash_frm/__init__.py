@@ -14,7 +14,7 @@ class Splash_frm(Splash_frmTemplate):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        self.timer_1.interval = 1 # 1 sec interval per tick
+        self.timer_1.interval = 0.5 # 1 sec interval per tick
         self.time             = 2 # 2 secs countdown
 
         # Delay before triggering animation
@@ -26,13 +26,13 @@ class Splash_frm(Splash_frmTemplate):
         """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
         if self.time == 0:
             # Add animation class to splash container
-            get_dom_node(self).classList.add("splash-animate")
+            get_dom_node(self).classList.add("splash-logo")#"splash-screen")
 
             # Wait for animation to finish, then open login form
-            js.window.setTimeout(self.go_to_login, 1500)
+            js.window.setTimeout(self.go_to_login, 2500)
             # open_form('Login_frm')
         else:
-            self.time -= 1
+            self.time -= self.timer_1.interval
 
     def go_to_login(self):
         open_form('Login_frm')

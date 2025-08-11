@@ -72,4 +72,9 @@ class MainDashboard_frm(MainDashboard_frmTemplate):
         """This method is called when the button is clicked"""
         self.load_pnl.clear()
         self.load_pnl.add_component(GenerateReport_frm(show='best-seller'))
+
+    def logout_btn_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        self.role = self.username = ''
+        open_form('Login_frm')
         
