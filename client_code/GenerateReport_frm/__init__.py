@@ -54,13 +54,13 @@ class GenerateReport_frm(GenerateReport_frmTemplate):
         if self.threshold_txb.text == '':
             alert('Threshold cannot be empty.')
             return
-        
+
         try:
             threshold_val = int(self.threshold_txb.text)
         except:
             alert('Threshold must be a valid integer.')
             return
-        
+
         if threshold_val < 0:
             alert('Threshold must be greater than or equal to zero.')
             return
@@ -73,7 +73,7 @@ class GenerateReport_frm(GenerateReport_frmTemplate):
             alert('Low-stock list is not available.  Please try a different threshold number.')
             self.threshold_txb.focus()
             return
-        
+
         # show low-stock list
         self.low_stock_rpnl.items = [plant for plant in self.low_stock_list]
         # self.download_ls_report_btn.enabled = True
