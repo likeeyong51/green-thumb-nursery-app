@@ -27,6 +27,7 @@ class MainDashboard_frm(MainDashboard_frmTemplate):
             # show Generate Report option, which is accessible to managers and admin only
             # self.generate_reports_btn.visible = True
             self.manager_crd.visible = True
+            self.user_lbl.tooltip    = 'Manager'
         else:
             self.manager_crd.visible = False
             

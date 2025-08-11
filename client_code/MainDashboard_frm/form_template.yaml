@@ -13,7 +13,7 @@ components:
     - {code: 'self.item[''username'']', property: text, writeback: false}
     layout_properties: {}
     name: user_lbl
-    properties: {font_size: 20, icon: 'fa:address-book-o', role: title, tooltip: User}
+    properties: {font_size: 20, icon: 'fa:address-book-o', role: title, tooltip: Staff}
     type: Label
   layout_properties: {slot: nav-right}
   name: navbar_links
