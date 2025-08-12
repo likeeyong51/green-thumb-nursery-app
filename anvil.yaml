@@ -99,9 +99,9 @@ db_schema:
     server: full
     title: Users
 dependencies: []
-metadata: {logo_img: 'asset:green_thumb_logo_1.png', title: Green Thumb Nursery}
-name: Green Thumb Nursery app
-package_name: Green_Thumb_Nursery_app
+metadata: {logo_img: 'asset:splash_screen.png', title: Green Thumb Nursery}
+name: Green Thumb Nursery app v1.0
+package_name: Green_Thumb_Nursery_app_v1_0
 renamed: true
 runtime_options:
   client_version: '3'
