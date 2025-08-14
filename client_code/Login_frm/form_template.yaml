@@ -12,7 +12,7 @@ components:
       spacing:
         margin: [12, null, 15, null]
         padding: [25, null, 25, null]
-      text: G.T. N. Log In
+      text: Log In
     type: Label
   - components:
     - layout_properties: {grid_position: 'KPXKCH,UIEOMY'}
