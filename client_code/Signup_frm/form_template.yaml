@@ -87,6 +87,6 @@ components:
   properties: {col_widths: '{"DVSHZR":20,"DNTJNY":10,"YLKTNG":10,"HWEJEW":20}'}
   type: ColumnPanel
 container:
-  properties: {col_widths: '{"KISPAO":10,"JOPGKY":10,"XVMNNP":18,"TPBOQA":2,"CYCRAI":18,"QLGSOT":2}'}
+  properties: {col_widths: '{"KISPAO":15,"JOPGKY":15,"XVMNNP":15,"CYCRAI":13,"QLGSOT":2}'}
   type: ColumnPanel
 is_package: true
