@@ -26,15 +26,19 @@ def get_user_roles():
 
 @anvil.server.callable
 def signup_user(firstname, lastname, emp_id, role, password):
-    '''Signs up a new user, ensuring the username is unique.'''
+    '''
+    Signs up a new user, ensuring the username is unique.
+    First with just the firstname.  If more than one user has the same
+    firstname, combine firstname with lastname.
+    '''
     username = firstname.replace(' ', '').lower() # remove spaces
-    email = f"{username}@nursery.com"
+    email    = f"{username}@nursery.com"
 
     # check if a user with this first name already exists
     if app_tables.users.get(email=email) and verify_password(password.encode('utf-8'), get_hashed_password(email)):
         # create a more unique username
-        username = f"{firstname.replace(' ', '').lower()}{lastname.replace(' ', '').lower()}"
-        email = f"{username}@nursery.com"
+        username = f"{firstname.replace(' ', '').lower()}.{lastname.replace(' ', '').lower()}"
+        email    = f"{username}@nursery.com"
 
         # check again with the combined name
         if app_tables.users.get(email=email) and verify_password(password.encode('utf-8'), get_hashed_password(email)):
@@ -105,4 +109,3 @@ def verify_password(password, hashed_password):
 #         return True, get_user_role(email) # login sucessful
 
 #     return False, None
-

@@ -13,11 +13,9 @@ class Signup_frm(Signup_frmTemplate):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        self.item['firstname'] = \
-        self.item['lastname']  = \
-        self.item['emp_id']    = \
-        self.item['role']      = \
-        self.item['password']  = None
+        self.item = {}
+        self.reset_form()
+        
         # populate dropdown list items from role table
         self.role_drp.items = [r['role'] for r in anvil.server.call('get_user_roles')]
 
@@ -36,6 +34,7 @@ class Signup_frm(Signup_frmTemplate):
             self.item['confirmed_password']
         ]):
             alert("All fields are required.")
+            self.firstname_txb.focus()
             return
         # if passwords entered is inconsistent
         if self.item['password'] != self.item['confirmed_password']:
@@ -66,7 +65,7 @@ class Signup_frm(Signup_frmTemplate):
             alert(str(e))
 
     def cancel_btn_click(self, **event_args):
-        """hide signup card"""
+        """hide signup card and return to the parent form"""
         get_open_form().hide_signup_card()
 
     def check_password_match(self, **event_args):
@@ -83,4 +82,20 @@ class Signup_frm(Signup_frmTemplate):
             self.confirmed_password_txb.role    = 'outlined'
             self.conf_pass_check_lbl.icon       = 'fa:check'
             self.conf_pass_check_lbl.foreground = 'green'
-            
+
+    def reset_form(self):
+        '''reset the signup ui'''
+        self.firstname_txb.text          = \
+        self.lastname_txb.text           = \
+        self.employeeID_txb.text         = \
+        self.password_txb.text           = \
+        self.confirmed_password_txb.text = \
+        self.role_drp.selected_value     = None
+        
+        self.item['firstname'] = \
+        self.item['lastname']  = \
+        self.item['emp_id']    = \
+        self.item['role']      = \
+        self.item['password']  = \
+        self.item['confirmed_password'] = None
+        
