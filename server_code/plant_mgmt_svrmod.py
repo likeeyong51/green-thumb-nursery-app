@@ -379,13 +379,13 @@ def download_best_sellers_pdf2():
     # Create table
     table = Table(table_data, colWidths=[150, 80, 100, 100])
     table.setStyle(TableStyle([
-        ('BACKGROUND', (0, 0), (-1, 0), colors.lightgreen),
-        ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),
-        ('ALIGN', (1, 1), (-1, -1), 'CENTER'),
-        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-        ('FONTSIZE', (0, 0), (-1, -1), 10),
+        ('BACKGROUND',    (0, 0), (-1, 0), colors.lightgreen),
+        ('TEXTCOLOR',     (0, 0), (-1, 0), colors.black),
+        ('ALIGN',         (1, 1), (-1, -1), 'CENTER'),
+        ('FONTNAME',      (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('FONTSIZE',      (0, 0), (-1, -1), 10),
         ('BOTTOMPADDING', (0, 0), (-1, 0), 8),
-        ('GRID', (0, 0), (-1, -1), 0.5, colors.grey),
+        ('GRID',          (0, 0), (-1, -1), 0.5, colors.grey),
     ]))
 
     elements.append(table)
